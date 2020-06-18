@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaGeneral.xhtml">
+
+            <ui:define name="contenido">
+                <center>
+                    <div class="container">
+                        <f:view>
+                            <h:form id="frmProducto" enctype="multipart/form-data">
+                                <h:inputHidden value="#{productoMB.accion}"/>
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel 
+                                        id="lblClave"
+                                        for="txtIdProducto"
+                                        value="Clave de producto"
+                                        rendered="#{productoMB.modoActualizar}"
+                                        />
+                                    <h:inputText 
+                                        id="txtIdProducto"
+                                        value="#{productoMB.dto.entidad.idProducto}"
+                                        readonly="true"
+                                        rendered="#{productoMB.modoActualizar}"
+                                        />
+
+                                    <h:outputLabel 
+                                        id="lblNombre"
+                                        for="txtNombre"
+                                        value="Nombre del producto"
+                                        />
+                                    <h:inputText 
+                                        id="txtNombre"
+                                        value="#{productoMB.dto.entidad.nombre}"
+                                        required="true"
+                                        requiredMessage="Introduzca un nombre"
+                                        maxlength="100"
+                                        />
+
+                                    <h:outputLabel 
+                                        id="lblPrecio"
+                                        for="txtPrecio"
+                                        value="Precio del producto"
+                                        />
+
+                                    <h:inputText 
+                                        id="txtPrecio"
+                                        value="#{productoMB.dto.entidad.precio}"
+                                        required="true"
+                                        requiredMessage="Introduzca un precio"
+
+                                        />
+
+                                    <h:outputLabel 
+                                        id="lblDescripcion"
+                                        for="txtDescripcion"
+                                        value="Descripcion del producto"
+                                        />
+
+                                    <h:inputText 
+                                        id="txtDescripcion"
+                                        value="#{productoMB.dto.entidad.descripcion}"
+                                        required="true"
+                                        requiredMessage="Introduzca descripcion del producto"
+                                        maxlength="200"
+                                        />
+
+                                    <h:outputLabel 
+                                        id="lblImagen"
+                                        for="flImagen"
+                                        value="Imagen del producto"
+                                        />
+
+                                    <h:inputFile
+                                        id="flImagen"
+                                        value="#{productoMB.archivo}"
+                                        required="true"
+                                        requiredMessage="Introduzca una imagen"
+
+                                        /> 
+
+                                    <h:outputLabel 
+                                        id="lblCategoria"
+                                        for="txtCategoria"
+                                        value="Categoria del producto"
+                                        />
+
+
+                                    <h:selectOneMenu value="#{productoMB.dto.entidad.idCategoria}">
+                                        <c:forEach items="#{categoriaMB.listaCategorias}" var="categorias">
+                                            <f:selectItem itemValue="#{categorias.entidad.idCategoria}" itemLabel="#{categorias.entidad.nombre}"/>
+                                        </c:forEach>                                        
+                                    </h:selectOneMenu>
+                                    <h:commandButton value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-primary"/>
+
+                                    <h:commandButton value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
+
+                                    <h:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-info"/>                                    
+                                </h:panelGrid>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

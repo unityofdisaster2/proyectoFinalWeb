@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -26,7 +27,6 @@ public class Producto implements Serializable{
     private String nombre;
     private double precio;
     private String descripcion;
-    
     private byte[] imagen;
     private int idCategoria;
 

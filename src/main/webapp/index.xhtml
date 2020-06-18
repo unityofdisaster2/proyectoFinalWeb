@@ -8,7 +8,14 @@
     <h:body>
         <ui:composition template="plantillas/plantillaGeneral.xhtml">
             <ui:define name="contenido">
-                <ui:include src="productos/prueba.xhtml"></ui:include>
+                <!--
+                <ui:include src="productos/prueba.xhtml"></ui:include>-->
+                
+                <h:form id="frmInicio">
+                    <h:commandLink action="#{productoMB.prepareAdd()}">Nuevo Producto</h:commandLink>
+                    <br></br>
+                    <h:commandLink action="#{productoMB.prepareIndex()}">lista de productos</h:commandLink>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
