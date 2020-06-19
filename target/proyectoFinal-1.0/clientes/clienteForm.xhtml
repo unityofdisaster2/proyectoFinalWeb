@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaGeneral.xhtml">
+
+            <ui:define name="titulo">
+                <title>Creaci&oacute;n de usuario</title>
+            </ui:define>
+
+            <ui:define name="contenido">
+                <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
+                    <h5>Datos de usuario</h5>
+                    <div class="dropdown-divider"></div>                
+                    <f:view>
+                        <h:form id="frmCliente">
+                            <h:inputHidden value="#{clienteMB.accion}"/>
+
+                            <div class="form-group">
+                                <h:outputLabel
+                                    id="lblIdCliente"
+                                    for="txtIdCliente"
+                                    value="Id Cliente"
+                                    rendered="#{clienteMB.modoActualizar}"
+
+                                    />
+
+                                <p:inputText
+                                    id="txtIdCliente"
+                                    value="#{clienteMB.dto.entidad.idCliente}"
+                                    readonly="true"
+                                    class="form-control"
+                                    rendered="#{clienteMB.modoActualizar}"
+                                    />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblNombre"
+                                        for="txtNombre"
+                                        value="Nombre"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtNombre"
+                                        value="#{clienteMB.dto.entidad.nombre}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un nombre"
+                                        a:placeholder="Nombre"
+                                        />                                
+                                </div>
+
+                                <div class="form-group  col-md-6">
+                                    <h:outputLabel
+                                        id="lblPaterno"
+                                        for="txtPaterno"
+                                        value="Paterno"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtPaterno"
+                                        value="#{clienteMB.dto.entidad.paterno}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un apellido paterno"
+                                        a:placeholder="Apellido Paterno"
+
+                                        />                                
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblMaterno"
+                                        for="txtMaterno"
+                                        value="Materno"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtMaterno"
+                                        value="#{clienteMB.dto.entidad.materno}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un apellido materno"
+                                        a:placeholder="Apellido Materno"
+
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblTelefono"
+                                        for="txtTelefono"
+                                        value="Telefono"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtTelefono"
+                                        value="#{clienteMB.dto.entidad.telefono}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Ingrese un número telefónico valido"
+                                        a:placeholder="Numero telefónico"
+                                        type="tel"
+                                        />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblEmail"
+                                        for="txtEmail"
+                                        value="Email"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtEmail"
+                                        value="#{clienteMB.dto.entidad.email}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Ingrese un email valido"
+                                        a:placeholder="Correo Electrónico"
+                                        type="email"
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblCalle"
+                                        for="txtCalle"
+                                        value="Calle"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtCalle"
+                                        value="#{clienteMB.dto.entidad.calle}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar una calle"
+                                        a:placeholder="Calle"
+
+                                        />                                
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblNumero"
+                                        for="txtNumero"
+                                        value="Numero"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtNumero"
+                                        value="#{clienteMB.dto.entidad.numero}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un número"
+                                        a:placeholder="Numero"
+                                        type="number"
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblEstado"
+                                        for="txtEstado"
+                                        value="Estado"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtEstado"
+                                        value="#{clienteMB.dto.entidad.estado}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un estado"
+                                        a:placeholder="Estado"
+
+                                        />                                
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblCiudad"
+                                        for="txtCiudad"
+                                        value="Ciudad"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtCiudad"
+                                        value="#{clienteMB.dto.entidad.ciudad}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar una ciudad"
+                                        a:placeholder="Ciudad"
+
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblCodigoPostal"
+                                        for="txtCodigoPostal"
+                                        value="CP"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtCodigoPostal"
+                                        value="#{clienteMB.dto.entidad.codigoPostal}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un código postal"
+                                        a:placeholder="Código Postal"
+
+                                        />
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblUsuario"
+                                        for="txtUsuario"
+                                        value="Usuario"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtUsuario"
+                                        value="#{clienteMB.dto.entidad.usuario}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Ingrese un nombre de usuario valido"
+                                        a:placeholder="Nombre de Usuario"
+
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblContrasena"
+                                        for="txtContrasena"
+                                        value="Contrasena"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtContrasena"
+                                        value="#{clienteMB.dto.entidad.contrasena}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario crear una contraseña"
+                                        a:placeholder="Contraseña"
+                                        type="text"
+                                        />
+                                </div>
+
+                            </div>
+                            <p:messages></p:messages>
+                            <p:commandButton update="@form" action="#{clienteMB.add()}" rendered="#{clienteMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear Usuario"/>
+                            
+
+
+
+
+
+
+
+                        </h:form>
+                    </f:view>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

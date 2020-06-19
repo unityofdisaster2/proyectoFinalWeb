@@ -44,7 +44,6 @@ public class ClienteDAO {
             transaction.begin();
             
             session.update(dto.getEntidad());
-            System.out.println("pasa algo");
             transaction.commit();
             
         }catch(HibernateException he){

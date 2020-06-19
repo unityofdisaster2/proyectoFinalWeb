@@ -7,9 +7,7 @@ package com.ipn.mx.web.bean;
 
 import com.ipn.mx.modelo.dao.ProductoDAO;
 import com.ipn.mx.modelo.dto.ProductoDTO;
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.io.InputStream;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,8 +18,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.Part;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -87,12 +83,12 @@ public class ProductoMB extends BaseBean implements Serializable {
     public String prepareAdd() {
         dto = new ProductoDTO();
         setAccion(ACC_CREAR);
-        return "/productos/productoForm?faces-redirect-true";
+        return "/productos/productoForm?faces-redirect=true";
     }
 
     public String prepareUpdate() {
         setAccion(ACC_ACTUALIZAR);
-        return "/productos/productoForm?faces-redirect-true";
+        return "/productos/productoForm?faces-redirect=true";
     }
 
     public String back() {

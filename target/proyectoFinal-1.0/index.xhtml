@@ -14,7 +14,11 @@
                 <h:form id="frmInicio">
                     <h:commandLink action="#{productoMB.prepareAdd()}">Nuevo Producto</h:commandLink>
                     <br></br>
+                    <h:commandLink action="#{clienteMB.prepareAdd()}">Nuevo cliente</h:commandLink>
+                    <br></br>
                     <h:commandLink action="#{productoMB.prepareIndex()}">lista de productos</h:commandLink>
+                    <br></br>
+                    <h:commandLink action="/general/loginPage">Login page</h:commandLink>                    
                 </h:form>
             </ui:define>
         </ui:composition>

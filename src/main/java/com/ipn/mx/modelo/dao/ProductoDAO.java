@@ -114,6 +114,66 @@ public class ProductoDAO {
         }
         return lista;
     }
+
+    public List<ProductoDTO> obtenerTenis(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        List aux = null;
+        List<ProductoDTO> lista = new ArrayList<>();
+        try{
+            transaction.begin();
+            
+            Query q = session.createQuery("FROM Producto");
+            aux = q.list();
+            for(int i = 0; i < aux.size(); i++){
+                ProductoDTO dto = new ProductoDTO();
+                dto.setEntidad((Producto)aux.get(i));
+                lista.add(dto);
+            }
+            
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return lista;
+    }
+
+
+    public List<ProductoDTO> obtenerRopa(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        List aux = null;
+        List<ProductoDTO> lista = new ArrayList<>();
+        try{
+            transaction.begin();
+            
+            Query q = session.createQuery("FROM Producto");
+            aux = q.list();
+            for(int i = 0; i < aux.size(); i++){
+                ProductoDTO dto = new ProductoDTO();
+                dto.setEntidad((Producto)aux.get(i));
+                lista.add(dto);
+            }
+            
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return lista;
+    }
+    
+    
+    
+    
+    
     public static void main(String[] args) {
         ProductoDTO dto = new ProductoDTO();
         ProductoDAO dao = new ProductoDAO();

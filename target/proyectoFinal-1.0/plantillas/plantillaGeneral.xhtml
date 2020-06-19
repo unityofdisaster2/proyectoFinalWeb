@@ -6,26 +6,51 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Facelets Template</title>
+
+        <div id="titulo">
+            <ui:insert name="titulo">
+                <title>Index</title>
+            </ui:insert>
+        </div>
+
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputScript library="js" name="jquery-3.5.1.min.js"/>
         <h:outputScript library="js" name="popper.min.js"/>
         <h:outputScript library="js" name="bootstrap.min.js"/>        
     </h:head>
 
-    <h:body>
+    <h:body style="padding-top:76px;background-image: url(#{request.contextPath}/resources/imgs/fondo3.png)">
 
         <div id="header">
             <ui:insert name="header">
+                <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#{request.contextPath}">
+                        <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
+                        Snkr Store
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h:form id="frmNav">
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Pricing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <h:commandLink class="nav-link" action="/general/loginPage">Iniciar Sesi&oacute;n</h:commandLink> 
+                                </li>
+                            </ul>
+                        </div>
+                    </h:form>
+                </nav>
 
-                <nav class="navbar navbar-dark bg-dark">
-                    <a class="navbar-brand">Navbar</a>
-                    <form class="form-inline">
-                        
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </nav>                
             </ui:insert>
         </div>
 
@@ -111,8 +136,7 @@
                     <!-- Footer Links -->
 
                     <!-- Copyright -->
-                    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+                    <div class="footer-copyright text-center py-3">2020: Raymundo Rosales Reyes, Irving Aguiar Hernandez
                     </div>
                     <!-- Copyright -->
 
