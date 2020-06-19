@@ -49,6 +49,7 @@ public class CategoriaMB extends BaseBean implements Serializable {
     }
 
     public List<CategoriaDTO> getListaCategorias() {
+        init();
         return listaCategorias;
     }
 
