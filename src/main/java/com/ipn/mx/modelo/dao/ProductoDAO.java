@@ -114,6 +114,17 @@ public class ProductoDAO {
         }
         return lista;
     }
-
+    
+    public static void main(String[] args) {
+        ProductoDTO dto = new ProductoDTO();
+        ProductoDAO dao = new ProductoDAO();
+        byte [] algo = new byte[10];
+        dto.getEntidad().setNombre("nike");
+        dto.getEntidad().setDescripcion("nike");
+        dto.getEntidad().setIdCategoria(4);
+        dto.getEntidad().setImagen(algo);
+        dao.crear(dto);
+        System.out.println(dao.leerTodos());
+    }
 
 }

@@ -119,12 +119,11 @@
                                         class="custom-file-label"
                                         />
 
-                                    <p:inputText
+                                    <h:inputFile
                                         id="flImagen"
                                         value="#{productoMB.archivo}"
                                         required="true"
-                                        requiredMessage="Introduzca una imagen"                                        
-                                        type="file"
+                                        requiredMessage="Introduzca una imagen"
                                         class="custom-file-input"
                                         />
                                 </div>
@@ -133,13 +132,13 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <p:commandButton update="@form" value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary"/>
+                                    <h:commandButton value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary"/>
                                 </div>
                                 <div class="col">
-                                    <p:commandButton update="@form" value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
+                                    <h:commandButton value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
                                 </div>
                                 <div class="col">
-                                    <p:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-outline-info"/>
+                                    <h:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-outline-info"/>
                                 </div>
                             </div>
 

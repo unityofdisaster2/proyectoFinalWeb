@@ -11,7 +11,7 @@
         <property name="connection.password">T3st1ng08</property>
         -->
         
-        
+
         <property name="connection.url">jdbc:postgresql://ec2-52-200-48-116.compute-1.amazonaws.com:5432/d7bsv5nsmgaaac?ssl=true</property>
         <property name="connection.username">bdzyjmknbytdza</property>
         <property name="connection.password">0cba763791aebcb68a70f728ad6e935aa4af668e6919aeec0210ef71d67ca47f</property>
