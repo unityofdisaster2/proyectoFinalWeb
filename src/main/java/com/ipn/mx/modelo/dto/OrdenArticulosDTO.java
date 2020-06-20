@@ -5,10 +5,34 @@
  */
 package com.ipn.mx.modelo.dto;
 
+import com.ipn.mx.modelo.entidades.OrdenArticulos;
+import java.io.Serializable;
+
 /**
  *
  * @author unityofdisaster
  */
-public class OrdenArticulosDTO {
+public class OrdenArticulosDTO implements Serializable{
+    private OrdenArticulos entidad;
+
+    public OrdenArticulosDTO() {
+        entidad = new OrdenArticulos();
+    }
+
+    public OrdenArticulos getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(OrdenArticulos entidad) {
+        this.entidad = entidad;
+    }
+
+    @Override
+    public String toString() {
+        return "OrdenArticulosDTO{" + "entidad=" + entidad + '}';
+    }
+    
+    
+    
     
 }
