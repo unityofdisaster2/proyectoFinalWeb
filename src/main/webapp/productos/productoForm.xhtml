@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -12,80 +13,88 @@
                 <title>Agregar producto</title>
             </ui:define>
             <ui:define name="contenido">
-                <center>
-                    <div class="container">
-                        <f:view>
-                            <h:form id="frmProducto" enctype="multipart/form-data">
-                                <h:inputHidden value="#{productoMB.accion}"/>
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel 
-                                        id="lblClave"
-                                        for="txtIdProducto"
-                                        value="Clave de producto"
-                                        rendered="#{productoMB.modoActualizar}"
-                                        />
-                                    <h:inputText 
-                                        id="txtIdProducto"
-                                        value="#{productoMB.dto.entidad.idProducto}"
-                                        readonly="true"
-                                        rendered="#{productoMB.modoActualizar}"
-                                        />
+                <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
+                    <h5>Datos del producto</h5>
+                    <div class="dropdown-divider"></div>  
+                    <f:view>
+                        <h:form id="frmProducto" enctype="multipart/form-data">
+                            <h:inputHidden value="#{productoMB.accion}"/>
+                            <div class="form-group">
+                                <h:outputLabel 
+                                    id="lblClave"
+                                    for="txtIdProducto"
+                                    value="Clave de producto"
+                                    rendered="#{productoMB.modoActualizar}"
+                                    />
+                                <h:inputText 
+                                    id="txtIdProducto"
+                                    value="#{productoMB.dto.entidad.idProducto}"
+                                    readonly="true"
+                                    rendered="#{productoMB.modoActualizar}"
+                                    class="form-control"
+                                    />
+                            </div>
 
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
                                     <h:outputLabel 
                                         id="lblNombre"
                                         for="txtNombre"
                                         value="Nombre del producto"
                                         />
-                                    <h:inputText 
+                                    <p:inputText 
                                         id="txtNombre"
                                         value="#{productoMB.dto.entidad.nombre}"
                                         required="true"
                                         requiredMessage="Introduzca un nombre"
                                         maxlength="100"
+                                        type="text"
+                                        class="form-control"
                                         />
 
+                                </div>
+
+
+                                <div class="form-group col-md-6">
                                     <h:outputLabel 
                                         id="lblPrecio"
                                         for="txtPrecio"
                                         value="Precio del producto"
                                         />
 
-                                    <h:inputText 
+                                    <p:inputText 
                                         id="txtPrecio"
                                         value="#{productoMB.dto.entidad.precio}"
                                         required="true"
+                                        type="number"
                                         requiredMessage="Introduzca un precio"
-
+                                        class="form-control"
                                         />
 
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
                                     <h:outputLabel 
                                         id="lblDescripcion"
                                         for="txtDescripcion"
                                         value="Descripcion del producto"
                                         />
 
-                                    <h:inputText 
+                                    <p:inputText 
                                         id="txtDescripcion"
                                         value="#{productoMB.dto.entidad.descripcion}"
                                         required="true"
                                         requiredMessage="Introduzca descripcion del producto"
                                         maxlength="200"
+                                        type="text"
+                                        class="form-control"
                                         />
-
-                                    <h:outputLabel 
-                                        id="lblImagen"
-                                        for="flImagen"
-                                        value="Imagen del producto"
-                                        />
-
-                                    <h:inputFile
-                                        id="flImagen"
-                                        value="#{productoMB.archivo}"
-                                        required="true"
-                                        requiredMessage="Introduzca una imagen"
-
-                                        /> 
-
+                                </div>
+                                <div class="form-group col-md-6">
                                     <h:outputLabel 
                                         id="lblCategoria"
                                         for="txtCategoria"
@@ -93,21 +102,51 @@
                                         />
 
 
-                                    <h:selectOneMenu value="#{productoMB.dto.entidad.idCategoria}">
-                                        <ui:repeat value="#{categoriaMB.listaCategorias}" var="categorias">
-                                            <f:selectItem itemValue="#{categorias.entidad.idCategoria}" itemLabel="#{categorias.entidad.nombre}"/>
-                                        </ui:repeat>
+                                    <h:selectOneMenu value="#{productoMB.dto.entidad.idCategoria}" class="form-control">
+                                        <f:selectItems value="#{categoriaMB.listaCategorias}" var="categorias"
+                                                       itemLabel="#{categorias.entidad.nombre}"
+                                                       itemValue="#{categorias.entidad.idCategoria}"
+                                                       />
                                     </h:selectOneMenu>
-                                    <h:commandButton value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-primary"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <h:outputLabel 
+                                        id="lblImagen"
+                                        for="flImagen"
+                                        value="Imagen del producto"
+                                        class="custom-file-label"
+                                        />
 
-                                    <h:commandButton value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
+                                    <p:inputText
+                                        id="flImagen"
+                                        value="#{productoMB.archivo}"
+                                        required="true"
+                                        requiredMessage="Introduzca una imagen"                                        
+                                        type="file"
+                                        class="custom-file-input"
+                                        />
+                                </div>
+                            </div>
 
-                                    <h:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-info"/>                                    
-                                </h:panelGrid>
-                            </h:form>
-                        </f:view>
-                    </div>
-                </center>
+
+                            <div class="row">
+                                <div class="col">
+                                    <p:commandButton update="@form" value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary"/>
+                                </div>
+                                <div class="col">
+                                    <p:commandButton update="@form" value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
+                                </div>
+                                <div class="col">
+                                    <p:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-outline-info"/>
+                                </div>
+                            </div>
+
+                            <p:messages></p:messages>
+                        </h:form>
+                    </f:view>
+                </div>
             </ui:define>
 
         </ui:composition>

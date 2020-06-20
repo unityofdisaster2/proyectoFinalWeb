@@ -24,10 +24,12 @@
         <div id="header">
             <ui:insert name="header">
                 <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#{request.contextPath}">
-                        <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
-                        Snkr Store
-                    </a>
+                    <h:form id="frmLogo">
+                        <h:commandLink action="/index" class="navbar-brand">
+                            <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
+                            Snkr Store
+                        </h:commandLink>
+                    </h:form>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -35,7 +37,7 @@
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Home</a>
+                                    <h:commandLink class="nav-link" action="/index">Home</h:commandLink> 
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Features</a>
