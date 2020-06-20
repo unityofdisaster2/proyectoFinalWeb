@@ -60,7 +60,7 @@ public class ClienteMB extends BaseBean implements Serializable {
     public String prepareAdd() {
         dto = new ClienteDTO();
         setAccion(ACC_CREAR);
-        return "/clientes/clienteForm";
+        return "/clientes/clienteForm?faces-redirect=true";
 
     }
 
