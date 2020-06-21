@@ -58,13 +58,22 @@
             <artifactId>primefaces</artifactId>
             <version>8.0</version>
         </dependency>
-        <!--        
+           
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
             <version>2.7.5</version>
         </dependency>
-        -->
+        <dependency> 
+            <groupId> org.jboss.weld.servlet </groupId> 
+            <artifactId> weld-servlet-shaded </artifactId> 
+            <version> 3.1.4.Final </version> 
+        </dependency>     
+        <dependency> 
+            <groupId> org.hibernate </groupId> 
+            <artifactId> hibernate-validator </artifactId> 
+            <version> 6.1.2.Final </version> 
+        </dependency>           
     </dependencies>
 
     <build>

@@ -102,7 +102,7 @@
                                         />
 
 
-                                    <h:selectOneMenu value="#{productoMB.dto.entidad.idCategoria}" class="form-control">
+                                    <h:selectOneMenu id="txtCategoria" value="#{productoMB.dto.entidad.idCategoria}" class="form-control">
                                         <f:selectItems value="#{categoriaMB.listaCategorias}" var="categorias"
                                                        itemLabel="#{categorias.entidad.nombre}"
                                                        itemValue="#{categorias.entidad.idCategoria}"

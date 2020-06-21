@@ -5,17 +5,17 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <!--
+        
         <property name="connection.url">jdbc:postgresql://localhost:5432/proyectofinal</property>
         <property name="connection.username">ray</property>
         <property name="connection.password">T3st1ng08</property>
-        -->
         
         
+        <!--
         <property name="connection.url">jdbc:postgresql://ec2-52-200-48-116.compute-1.amazonaws.com:5432/d7bsv5nsmgaaac?ssl=true</property>
         <property name="connection.username">bdzyjmknbytdza</property>
         <property name="connection.password">0cba763791aebcb68a70f728ad6e935aa4af668e6919aeec0210ef71d67ca47f</property>
-        
+        -->
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
         <!-- Select our SQL dialect -->
@@ -35,5 +35,10 @@
         <mapping class="com.ipn.mx.modelo.entidades.Cliente" />
         <mapping class="com.ipn.mx.modelo.entidades.Categoria" />
         <mapping class="com.ipn.mx.modelo.entidades.Producto" />
+        <mapping class="com.ipn.mx.modelo.entidades.Tarjeta" />
+        <mapping class="com.ipn.mx.modelo.entidades.Orden" />
+        <mapping class="com.ipn.mx.modelo.entidades.OrdenArticulos" />
+        <mapping class="com.ipn.mx.modelo.entidades.Administrador" />
+        
     </session-factory>
 </hibernate-configuration>

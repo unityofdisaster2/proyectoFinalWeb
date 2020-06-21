@@ -83,13 +83,17 @@ public class LoginMB {
         dtoAdmin = new AdministradorDTO();
         dtoAdmin.getEntidad().setUsuario(usuario);
         dtoAdmin.getEntidad().setContrasena(pass);
-        dtoAdmin = daoAdmin.leerCredenciales(dtoAdmin);
-        if(usuario.equals(dtoCliente.getEntidad().getUsuario()) && pass.equals(dtoCliente.getEntidad().getContrasena())){
-            session.agregar("idAdmin", dtoAdmin.getEntidad().getIdAdministrador());
-            session.agregar("nombreAdmin", dtoAdmin.getEntidad().getNombre());
-            return "/cliente/index?faces-redirect=true";
+        System.out.println(usuario + pass);
+        AdministradorDTO auxDto = new AdministradorDTO();
+        auxDto = daoAdmin.leerCredenciales(dtoAdmin);
+        if(auxDto != null){
+            if(usuario.equals(auxDto.getEntidad().getUsuario()) && pass.equals(auxDto.getEntidad().getContrasena())){
+                session.agregar("idAdmin", dtoAdmin.getEntidad().getIdAdministrador());
+                session.agregar("nombreAdmin", dtoAdmin.getEntidad().getNombre());
+                return "/clientes/indexCliente?faces-redirect=true";
+            }            
         }
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credenciales incorrectas", "Acceso denegado");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Acceso denegado", "Credenciales incorrectas");
         FacesContext.getCurrentInstance().addMessage(null, message);
         return null;
     }
