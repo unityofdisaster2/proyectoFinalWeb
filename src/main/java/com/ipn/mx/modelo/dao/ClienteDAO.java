@@ -88,6 +88,31 @@ public class ClienteDAO {
         return dto;
     }
 
+    public ClienteDTO leerCredenciales(ClienteDTO dto){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        try{
+            transaction.begin();
+            
+            String hql = "FROM Cliente c WHERE c.usuario = :user";
+            List result = session.createQuery(hql).setParameter("user", dto.getEntidad().getUsuario()).list();
+            if(result.size() > 0 ){
+                dto.setEntidad((Cliente)result.get(0));
+            }else{
+                dto = null;
+            }
+            
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return dto;
+    }
+
     public List<ClienteDTO> leerTodos(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();
@@ -118,13 +143,9 @@ public class ClienteDAO {
     public static void main(String[] args) {
         ClienteDTO dto = new ClienteDTO();
         ClienteDAO dao = new ClienteDAO();
-        dto.getEntidad().setNombre("Jane");
-        dto.getEntidad().setPaterno("Doe");
-        dto.getEntidad().setMaterno("Doe");
-        dto.getEntidad().setEmail("Jane@gmail.com");
-        dto.getEntidad().setUsuario("JaneDoe");
+        dto.getEntidad().setUsuario("fezodu");
         dto.getEntidad().setContrasena("pass");
-        dao.crear(dto);
-        System.out.println(dao.leerTodos());
+        dto = dao.leerCredenciales(dto);
+        System.out.println(dto);
     }
 }

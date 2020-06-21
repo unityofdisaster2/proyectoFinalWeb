@@ -88,6 +88,24 @@ public class AdministradorDAO {
         return dto;
     }
 
+    public AdministradorDTO leerCredenciales(AdministradorDTO dto){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        try{
+            transaction.begin();
+            
+            dto.setEntidad(session.get(dto.getEntidad().getClass(), dto.getEntidad().getUsuario()));
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return dto;
+    }
+
     public List<AdministradorDTO> leerTodos(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();

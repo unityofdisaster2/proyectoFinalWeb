@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaGeneral.xhtml">
+
+            <ui:define name="titulo">
+                <title>Login Cliente</title>
+            </ui:define>
+            <ui:define name="contenido">
+                <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:300px">
+                    <h5>Login</h5>
+                    <div class="dropdown-divider"></div>
+                    <f:view>
+                        <h:form>
+
+                            <div class="form-group">
+                                <label for="txtUsuario">Usuario</label>
+                                <h:inputText class="form-control" value="#{loginMB.usuario}" id="txtUsuario" required="true" requiredMessage="Ingrese un usuario"/>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPass">Contrase&ntilde;a</label>
+                                <h:inputSecret class="form-control" value="#{loginMB.pass}" id="txtPass" required="true" requiredMessage="ingrese una contraseña"/>
+                            </div>
+                            <h:commandButton value="Iniciar Sesión" action="#{loginMB.loginUsuario()}" class="btn btn-outline-primary"/>
+                            <p:messages></p:messages>
+                        </h:form>
+                        <h:form>
+                            <div class="dropdown-divider"></div>
+                            <h:commandLink action="#{clienteMB.prepareAdd()}">¿A&uacute;n no tienes cuenta? Crear Cuenta</h:commandLink>                       
+                        </h:form>
+                    </f:view>
+
+                </div>
+                <div style="padding-bottom: 8px"></div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

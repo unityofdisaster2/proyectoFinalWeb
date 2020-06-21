@@ -25,7 +25,7 @@
             <ui:insert name="header">
                 <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
                     <h:form id="frmLogo">
-                        <h:commandLink action="/index" class="navbar-brand">
+                        <h:commandLink action="/index?faces-redirect=true" class="navbar-brand">
                             <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
                             Snkr Store
                         </h:commandLink>
@@ -40,13 +40,10 @@
                                     <h:commandLink class="nav-link" action="/index?faces-redirect=true">Home</h:commandLink> 
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
+                                    <h:commandLink class="nav-link" action="/productos/listaProductos?faces-redirect=true" value="lista de productos" />
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                </li>
-                                <li class="nav-item">
-                                    <h:commandLink class="nav-link" action="/general/loginPage?faces-redirect=true">Iniciar Sesi&oacute;n</h:commandLink> 
+                                    <h:commandLink class="nav-link" action="/general/loginCliente?faces-redirect=true">Iniciar Sesi&oacute;n</h:commandLink> 
                                 </li>
                             </ul>
                         </div>

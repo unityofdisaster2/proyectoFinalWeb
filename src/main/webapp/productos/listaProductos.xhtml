@@ -20,22 +20,21 @@
                                         <div class="card" style="width: 250px;">
                                             <!--<oou:graphicImage value="#{productos.entidad.imagen}" dataURI="true" width="250" height="250"/>
                                             -->
+                                            <p:graphicImage value="/imagen?id=#{productos.entidad.idProducto}" width="250" height="250"/>
                                             <div class="card-body">
                                                 <h5 class="card-title"><h:outputText value="#{productos.entidad.nombre}"/></h5>
                                                 <p class="card-text"><h:outputText value="#{productos.entidad.descripcion}"/> </p>
                                                 <p class="card-text"><h:outputText value="#{productos.entidad.precio}"/> </p>
+                                                <p class="card-text"><h:outputText value="#{productos.entidad.stock} disponibles"/> </p>
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row">
+                                                    <div class="col"></div>
                                                     <div class="col">
-                                                        <button class="btn btn-primary">-</button>
+                                                        <h:commandButton value="comprar" action="/general/loginCliente?faces-redirect=true" class="btn btn-primary" />
                                                     </div>
-                                                    <div class="col">
-                                                        <input value=""  style="width: 50px"/>
-                                                    </div>  
-                                                    <div class="col">
-                                                        <button class="btn btn-info">+</button>
-                                                    </div>                                                      
+                                                    <div class="col"></div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

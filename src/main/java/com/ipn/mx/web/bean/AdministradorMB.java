@@ -101,6 +101,10 @@ public class AdministradorMB extends BaseBean implements Serializable {
         }
     }
     
+    public String indexRedirect(){
+        return "/general/loginPage?faces-redirect=true";
+    }
+    
     public void seleccionarAdministrador(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap()

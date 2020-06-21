@@ -135,6 +135,10 @@ public class ProductoMB extends BaseBean implements Serializable {
         }
     }
     
+    public void algo(){
+        
+    }
+    
     public void seleccionarProducto(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap()

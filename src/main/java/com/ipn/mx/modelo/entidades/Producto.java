@@ -25,12 +25,22 @@ public class Producto implements Serializable{
     private String nombre;
     private double precio;
     private String descripcion;
+    private int stock;
     private byte[] imagen;
     private int idCategoria;
 
     public Producto() {
     }    
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    
+    
     public int getIdProducto() {
         return idProducto;
     }

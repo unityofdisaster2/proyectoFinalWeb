@@ -87,6 +87,28 @@ public class ProductoDAO {
         }
         return dto;
     }
+    
+    
+    public byte [] obtenerImagen(int id){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        byte [] bytes = null;
+        ProductoDTO dto = new ProductoDTO();
+        dto.getEntidad().setIdProducto(id);
+        try{
+            transaction.begin();
+            
+            bytes = session.get(dto.getEntidad().getClass(), dto.getEntidad().getIdProducto()).getImagen();
+            
+            transaction.commit();
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        
+        return bytes;
+    }
 
     public List<ProductoDTO> leerTodos(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -96,7 +118,7 @@ public class ProductoDAO {
         try{
             transaction.begin();
             
-            Query q = session.createQuery("FROM Producto");
+            Query q = session.createQuery("FROM Producto p ORDER BY p.idProducto");
             aux = q.list();
             for(int i = 0; i < aux.size(); i++){
                 ProductoDTO dto = new ProductoDTO();
