@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
                     <h5>Datos del producto</h5>
-                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>  
                     <f:view>
                         <h:form id="frmProducto" enctype="multipart/form-data">
                             <h:inputHidden value="#{productoMB.accion}"/>
@@ -98,7 +98,7 @@
                                     <h:outputLabel 
                                         id="lblCategoria"
                                         for="txtCategoria"
-                                        value="Categoria"
+                                        value="Categoria del producto"
                                         />
 
 
@@ -110,27 +110,22 @@
                                     </h:selectOneMenu>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <h:outputLabel 
+                                    id="lblStock"
+                                    for="txtStock"
+                                    value="Stock del producto"
+                                    />
 
-
-                            <div class="form-row">
-                                <div class="form-group col-12">
-                                    <h:outputLabel 
-                                        id="lblStock"
-                                        for="txtStock"
-                                        value="Stock"
-                                        />
-
-                                    <p:inputText 
-                                        id="txtStock"
-                                        value="#{productoMB.dto.entidad.stock}"
-                                        required="true"
-                                        requiredMessage="Introduzca stock de producto"
-                                        type="number"
-                                        class="form-control"
-                                        />
-                                </div>
+                                <p:inputText 
+                                    id="txtStock"
+                                    value="#{productoMB.dto.entidad.stock}"
+                                    required="true"
+                                    requiredMessage="Introduzca stock del producto"                                        
+                                    type="number"
+                                    class="form-control"
+                                    />
                             </div>
-
                             <div class="form-group">
                                 <div class="custom-file">
                                     <h:outputLabel 
@@ -142,7 +137,7 @@
 
                                     <h:inputFile
                                         id="flImagen"
-                                        value="#{productoMB.archivo}"
+                                        value="#{productoMB.archivo}"                                        
                                         class="custom-file-input"
                                         />
                                 </div>
@@ -151,17 +146,17 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <p:commandButton value="Nuevo" action="#{productoMB.crear()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary">
-                                        <f:param name="activar" value="nuevo"></f:param>
-                                    </p:commandButton>
+                                    <h:commandButton value="Nuevo" action="#{productoMB.crear()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary">
+                                        <f:param name="activar" value="nuevo"/>
+                                    </h:commandButton>
                                 </div>
                                 <div class="col">
-                                </div>
-
-                                <div class="col">
-                                    <p:commandButton value="Actualizar" action="#{productoMB.actualizar()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary">
+                                    <h:commandButton value="Actualizar" action="#{productoMB.actualizar()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary">
                                         <f:param name="activar" value="update"/>
-                                    </p:commandButton>
+                                    </h:commandButton>
+                                </div>
+                                <div class="col">
+                                    <h:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-outline-info"/>
                                 </div>
                             </div>
 
@@ -169,6 +164,8 @@
                         </h:form>
                     </f:view>
                 </div>
+
+
             </ui:define>
 
         </ui:composition>

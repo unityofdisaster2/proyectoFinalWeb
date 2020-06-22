@@ -47,6 +47,7 @@ public class ProductoMB extends BaseBean implements Serializable {
     private int[] cantidad;
     private double total;
     private HashMap<Integer, Integer> carritoLocal;
+
     public HashMap<Integer, Integer> getCarritoLocal() {
         return carritoLocal;
     }
@@ -58,16 +59,10 @@ public class ProductoMB extends BaseBean implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
-    
 
     public void setCarritoLocal(HashMap<Integer, Integer> carritoLocal) {
         this.carritoLocal = carritoLocal;
     }
-    
-    
-
 
     public String getMensaje() {
         return mensaje;
@@ -135,12 +130,9 @@ public class ProductoMB extends BaseBean implements Serializable {
     public void setListaCarrito(List<ProductoDTO> listaCarrito) {
         this.listaCarrito = listaCarrito;
     }
-    
-    
-    
 
     public void clearCarrito() {
-        HashMap<Integer, Integer> aux = (HashMap<Integer,Integer>)sesion.obtener("carrito");
+        HashMap<Integer, Integer> aux = (HashMap<Integer, Integer>) sesion.obtener("carrito");
         aux.clear();
         sesion.agregar("carrito", aux);
     }
@@ -162,23 +154,22 @@ public class ProductoMB extends BaseBean implements Serializable {
             }
         }
         System.out.println("asociar: " + id + " con: " + cantidad[i]);
-        HashMap<Integer, Integer> aux = (HashMap<Integer, Integer>)sesion.obtener("carrito");
+        HashMap<Integer, Integer> aux = (HashMap<Integer, Integer>) sesion.obtener("carrito");
         System.out.println("no llega aqui");
         aux.put(id, cantidad[i]);
         sesion.agregar("carrito", aux);
         mensaje = "agregado";
         return prepareClienteIndex();
     }
-    
-    
-    public String prepararCarrito(){
+
+    public String prepararCarrito() {
         init();
         total = 0.0;
         listaCarrito = new ArrayList<>();
-        carritoLocal = (HashMap<Integer, Integer>)sesion.obtener("carrito");
+        carritoLocal = (HashMap<Integer, Integer>) sesion.obtener("carrito");
         for (ProductoDTO producto : listaProductos) {
-            if(carritoLocal.containsKey(producto.getEntidad().getIdProducto())){
-                total += carritoLocal.get(producto.getEntidad().getIdProducto())*producto.getEntidad().getPrecio();
+            if (carritoLocal.containsKey(producto.getEntidad().getIdProducto())) {
+                total += carritoLocal.get(producto.getEntidad().getIdProducto()) * producto.getEntidad().getPrecio();
                 listaCarrito.add(producto);
             }
         }
@@ -198,7 +189,7 @@ public class ProductoMB extends BaseBean implements Serializable {
 
     public String back() {
         init();
-        return "/productos/listaProductos?faces-redirect=true";
+        return "/productos/listaProdAdmin?faces-redirect=true";
     }
 
     public String prepareIndex() {
@@ -232,9 +223,18 @@ public class ProductoMB extends BaseBean implements Serializable {
 
     public String actualizar() {
         try {
+            if (archivo != null) {
+                byte[] bytes = new byte[(int) archivo.getSize()];
+                DataInputStream dis = new DataInputStream(archivo.getInputStream());
+                dis.readFully(bytes);
+                dto.getEntidad().setImagen(bytes);
+
+            }
             dao.actualizar(dto);
             return prepareAdminIndex();
         } catch (Exception e) {
+            System.out.println("debe pasar algo niggaaaaa");
+            e.printStackTrace();
             error("errorActualizarEvento", "Error al actualizar el evento");
             return "/productos/listaProdAdmin?faces-redirect=true";
         }
