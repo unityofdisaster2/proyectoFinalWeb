@@ -115,5 +115,36 @@ public class OrdenDAO implements Serializable{
         }
         return lista;
     }
+
+
+    public List<OrdenDTO> leerOrdenesCliente(int id){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        List aux = null;
+        List<OrdenDTO> lista = new ArrayList<>();
+        try{
+            transaction.begin();
+            
+            Query q = session.createQuery("FROM Orden o WHERE o.idCliente= :idCli").setParameter("idCli", id);
+            aux = q.list();
+            for(int i = 0; i < aux.size(); i++){
+                OrdenDTO dto = new OrdenDTO();
+                dto.setEntidad((Orden)aux.get(i));
+                lista.add(dto);
+            }
+            
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return lista;
+    }
+
+
+
     
 }

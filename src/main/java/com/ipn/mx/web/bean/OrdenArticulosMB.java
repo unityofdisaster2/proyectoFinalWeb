@@ -76,6 +76,11 @@ public class OrdenArticulosMB extends BaseBean implements Serializable {
         return "/ordenArticulos/ordenArticulosForm?faces-redirect=true";
     }
 
+
+    public String goToDetalles() {
+        return "/ordenes/detalleOrden?faces-redirect=true";
+    }
+
     public String back() {
         init();
         return "/ordenArticulos/ordenArticulosForm?faces-redirect=true";
@@ -127,6 +132,18 @@ public class OrdenArticulosMB extends BaseBean implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void seleccionarOrdenIndividual(ActionEvent event){
+        String idOrd = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("detalle");
+        try {
+            listaOrdenArticulos = dao.leerRegistrosOrden(Integer.parseInt(idOrd));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
 }

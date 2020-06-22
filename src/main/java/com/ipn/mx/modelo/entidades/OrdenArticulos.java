@@ -7,8 +7,6 @@ package com.ipn.mx.modelo.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @IdClass(LlaveOrdenArticulos.class)
-@Table(name = "orden_articulos")
+@Table(name = "OrdenArticulos")
 public class OrdenArticulos implements Serializable{
     @Id
     private int idOrden;

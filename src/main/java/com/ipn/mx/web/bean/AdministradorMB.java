@@ -8,7 +8,9 @@ package com.ipn.mx.web.bean;
 import com.ipn.mx.modelo.dao.AdministradorDAO;
 import com.ipn.mx.modelo.dto.AdministradorDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -57,6 +59,13 @@ public class AdministradorMB extends BaseBean implements Serializable {
         this.listaAdmins = lista;
     }
     
+    
+    @PostConstruct
+    public void init(){
+        listaAdmins = new ArrayList<>();
+        listaAdmins = dao.leerTodos();
+    }
+    
     public String prepareAdd() {
         dto = new AdministradorDTO();
         setAccion(ACC_CREAR);
@@ -69,10 +78,20 @@ public class AdministradorMB extends BaseBean implements Serializable {
         return "/administrador/administradorForm?faces-redirect=true";
     }
 
+    public String prepareIndex() {
+        init();
+        return "/administrador/listaAdministradores?faces-redirect=true";
+    }
+
+    public String back() {
+        init();
+        return "/administrador/listaAdministradores?faces-redirect=true";
+    }
+
     public String add() {
         try {
             dao.crear(dto);
-            return "/general/loginPage?faces-redirect=true";
+            return prepareIndex();
         } catch (Exception e) {
             error("errorCrearCliente", "Error al crear cliente");
             return "/administrador/administradorForm?faces-redirect=true";
@@ -83,7 +102,7 @@ public class AdministradorMB extends BaseBean implements Serializable {
     public String update() {
         try {
             dao.actualizar(dto);
-            return "/general/loginPage?faces-redirect=true";
+            return prepareIndex();
         } catch (Exception e) {
             error("errorActualizarCliente", "Error al actualizar cliente");
             return "/administrador/administradorForm?faces-redirect=true";

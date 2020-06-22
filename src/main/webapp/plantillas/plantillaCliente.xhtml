@@ -50,7 +50,7 @@
                                             <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdateCliente(idCliente)}" value="Datos de usuario" />
                                         </li>
                                         <li class="nav-item">
-                                            <h:commandLink class="nav-link" action="/clientes/indexClientes?faces-redirect=true" value="Ordenes" />
+                                            <h:commandLink class="nav-link" action="#{ordenMB.prepareOrdenesCliente(idCliente)}" value="Ordenes" />
                                         </li>
                                         <li class="nav-item">
                                             <h:commandLink class="nav-link" action="#{productoMB.prepararCarrito()}" value="Carrito" />

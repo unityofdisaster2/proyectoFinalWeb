@@ -1,18 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                <title>Lista administradores</title>
             </ui:define>
 
             <ui:define name="content">
-                content
+                <div class="container">
+                    <f:view>
+                        <h:form id="frmAdmns">
+                            <div style="padding-bottom:10px"></div>
+
+
+                            <h:dataTable value="#{administradorMB.listaAdmins}" var="dto" class="table table-hover table-responsive-sm table-dark table-bordered rounded">
+
+                                <h:column class="col">
+                                    <f:facet name="header">Id de Administrador</f:facet>
+                                    <h:outputText value="#{dto.entidad.idAdministrador}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Nombre</f:facet>
+                                    <h:outputText value="#{dto.entidad.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Paterno</f:facet>
+                                    <h:outputText value="#{dto.entidad.paterno}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Materno</f:facet>
+                                    <h:outputText value="#{dto.entidad.materno}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Usuario</f:facet>
+                                    <h:outputText value="#{dto.entidad.usuario}"/>
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">Acciones</f:facet>
+
+                                    <p:commandButton class="btn btn-danger" update="@form" value="Eliminar" actionListener="#{administradorMB.seleccionarAdministrador(event)}" action="#{administradorMB.borrar()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idAdministrador}" />
+                                    </p:commandButton>
+                                    <p:commandButton class="btn btn-primary" value="Actualizar" actionListener="#{administradorMB.seleccionarAdministrador(event)}" action="#{administradorMB.prepareUpdate()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idAdministrador}" />
+                                    </p:commandButton>
+
+                                </h:column>
+                            </h:dataTable>
+                            <p:commandButton class="btn btn-primary" value="Nuevo" action="#{administradorMB.prepareAdd()}">
+
+                            </p:commandButton>                            
+                        </h:form>
+                    </f:view>
+                </div>
+                <div style="padding-bottom: 150px"></div>
+
             </ui:define>
 
         </ui:composition>

@@ -20,6 +20,13 @@ public class LlaveOrdenArticulos implements Serializable{
         this.idProducto = idProducto;
     }
 
+    public LlaveOrdenArticulos() {
+    }
+    
+    
+    
+    
+
     public int getIdOrden() {
         return idOrden;
     }

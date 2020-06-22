@@ -26,6 +26,7 @@ public class Orden  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idOrden;
+    private String estatusOrden;
     @Temporal(TemporalType.DATE)
     private Date fechaOrden;
     @Temporal(TemporalType.DATE)
@@ -36,6 +37,16 @@ public class Orden  implements Serializable{
 
     public Orden() {
     }
+
+    public String getEstatusOrden() {
+        return estatusOrden;
+    }
+
+    public void setEstatusOrden(String estatusOrden) {
+        this.estatusOrden = estatusOrden;
+    }
+    
+    
 
     public int getIdOrden() {
         return idOrden;

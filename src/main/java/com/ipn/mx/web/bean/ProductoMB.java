@@ -8,12 +8,17 @@ package com.ipn.mx.web.bean;
 import com.ipn.mx.modelo.dao.OrdenArticulosDAO;
 import com.ipn.mx.modelo.dao.OrdenDAO;
 import com.ipn.mx.modelo.dao.ProductoDAO;
+import com.ipn.mx.modelo.dto.OrdenArticulosDTO;
+import com.ipn.mx.modelo.dto.OrdenDTO;
 import com.ipn.mx.modelo.dto.ProductoDTO;
 import com.ipn.mx.utilerias.SessionUtil;
 import java.io.DataInputStream;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -174,6 +179,62 @@ public class ProductoMB extends BaseBean implements Serializable {
             }
         }
         return "/clientes/carrito?faces-redirect=true";
+    }
+
+    public String finalizarPedido() {
+        init();
+        if (carritoLocal.size() > 0) {
+            try {
+                OrdenDTO orDTO = new OrdenDTO();
+                orDTO.getEntidad().setIdCliente((Integer) sesion.obtener("idCliente"));
+                Date hoy = new Date();
+                orDTO.getEntidad().setFechaOrden(hoy);
+                
+                // procesando
+                orDTO.getEntidad().setEstatusOrden("P");
+                ordenDAO.crear(orDTO);
+
+                List<OrdenDTO> listaAux = new ArrayList<>();
+                listaAux = ordenDAO.leerOrdenesCliente((Integer) sesion.obtener("idCliente"));
+                orDTO = listaAux.get(listaAux.size() - 1);
+
+                int num = 1;
+                for (ProductoDTO producto : listaProductos) {
+
+                    if (carritoLocal.containsKey(producto.getEntidad().getIdProducto())) {
+
+                        OrdenArticulosDTO ordArDTO = new OrdenArticulosDTO();
+                        ordArDTO.getEntidad().setIdOrden(orDTO.getEntidad().getIdOrden());
+                        ordArDTO.getEntidad().setIdProducto(producto.getEntidad().getIdProducto());
+                        ordArDTO.getEntidad().setCantidad(carritoLocal.get(producto.getEntidad().getIdProducto()));
+                        ordArDTO.getEntidad().setIditem(num);
+                        ordArDTO.getEntidad().setPrecio(producto.getEntidad().getPrecio());
+                        num++;
+                        ordArtDAO.crear(ordArDTO);
+                        
+                        producto.getEntidad().setStock(producto.getEntidad().getStock() - carritoLocal.get(producto.getEntidad().getIdProducto()));
+                        dao.actualizar(producto);
+                    }
+                }
+
+                carritoLocal.clear();
+                HashMap<Integer, Integer> carritoSesion = (HashMap<Integer, Integer>) sesion.obtener("carrito");
+                carritoSesion.clear();
+                sesion.agregar("carrito", carritoSesion);
+                for(int i = 0; i < cantidad.length; i++){
+                    cantidad[i] = 0;
+                }
+
+                return "/clientes/indexCliente?faces-redirect=true";
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        } else {
+            return null;
+        }
     }
 
     public String prepareAdd() {

@@ -9,12 +9,23 @@
         <ui:composition template="./../plantillas/plantillaCliente.xhtml">
 
             <ui:define name="content">
-                hola clientucho
-                <h1>#{idCliente}</h1>
-                <h1>#{nombreCliente}</h1>
-                <h:form>
-                    <h:commandButton action="#{loginMB.logoutCliente()}" value="logout"></h:commandButton>
-                </h:form>
+                <div class="container" style="padding: 40px">
+                    <div class="jumbotron">
+                        <h1 class="display-4">Bienvenido #{nombreCliente}</h1>
+                        <p class="lead">
+                            En tu cuenta puedes realizar compras, modificar tus datos de usuario, verificar las ordenes realizadas y su estado y acceder al carrito
+                            de compras para realizar pedidos.
+                        </p>
+                        <hr class="my-4"/>
+                            <p>Para ver nuestros productos puedes presionar este boton o seleccionar la opci&oacute;n correspondiente en el menu</p>
+                            <p class="lead">
+                                <h:form>
+                                    <h:commandButton class="btn btn-primary btn-lg" action="#{productoMB.prepareClienteIndex()}" value="Productos"/>
+                                </h:form>
+                            </p>
+                    </div>                    
+                </div>
+
             </ui:define>
 
         </ui:composition>

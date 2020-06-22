@@ -1,18 +1,158 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                <title>Formulario administradores</title>
             </ui:define>
 
             <ui:define name="content">
-                content
+
+                <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
+                    <h5>Datos de usuario</h5>
+                    <div class="dropdown-divider"></div>                
+                    <f:view>
+                        <h:form id="frmAdminis">
+                            <h:inputHidden value="#{administradorMB.accion}"/>
+
+                            <div class="form-group">
+                                <h:outputLabel
+                                    id="lblIdAdmin"
+                                    for="txtIdAdmin"
+                                    value="Id Administrador"
+                                    rendered="#{administradorMB.modoActualizar}"
+
+                                    />
+
+                                <p:inputText
+                                    id="txtIdAdmin"
+                                    value="#{administradorMB.dto.entidad.idAdministrador}"
+                                    readonly="true"
+                                    class="form-control"
+                                    rendered="#{administradorMB.modoActualizar}"
+                                    />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblNombre"
+                                        for="txtNombre"
+                                        value="Nombre"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtNombre"
+                                        value="#{administradorMB.dto.entidad.nombre}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un nombre"
+                                        a:placeholder="Nombre"
+                                        />                                
+                                </div>
+
+                                <div class="form-group  col-md-6">
+                                    <h:outputLabel
+                                        id="lblPaterno"
+                                        for="txtPaterno"
+                                        value="Paterno"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtPaterno"
+                                        value="#{administradorMB.dto.entidad.paterno}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un apellido paterno"
+                                        a:placeholder="Apellido Paterno"
+
+                                        />                                
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblMaterno"
+                                        for="txtMaterno"
+                                        value="Materno"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtMaterno"
+                                        value="#{administradorMB.dto.entidad.materno}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario ingresar un apellido materno"
+                                        a:placeholder="Apellido Materno"
+
+                                        />                                
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblUsuario"
+                                        for="txtUsuario"
+                                        value="Usuario"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtUsuario"
+                                        value="#{administradorMB.dto.entidad.usuario}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Ingrese un nombre de usuario valido"
+                                        a:placeholder="Nombre de Usuario"
+
+                                        />                                
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h:outputLabel
+                                        id="lblContrasena"
+                                        for="txtContrasena"
+                                        value="Contrasena"
+
+                                        />
+
+                                    <p:inputText
+                                        id="txtContrasena"
+                                        value="#{administradorMB.dto.entidad.contrasena}"
+                                        class="form-control"
+                                        required="true"
+                                        requiredMessage="Es necesario crear una contraseña"
+                                        a:placeholder="Contraseña"
+                                        type="text"
+                                        />
+                                </div>
+
+                            </div>
+                            <p:commandButton action="#{administradorMB.add()}" rendered="#{administradorMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear"/>
+                            <p:commandButton action="#{administradorMB.update()}" rendered="#{administradorMB.modoActualizar}"  type="Submit" class="btn btn-outline-primary" value="Actualizar"/>
+
+                            <p:messages></p:messages>
+                        </h:form>
+                    </f:view>
+                </div>
+
+                
+                
             </ui:define>
 
         </ui:composition>

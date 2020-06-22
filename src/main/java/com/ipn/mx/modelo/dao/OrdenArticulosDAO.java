@@ -26,15 +26,18 @@ public class OrdenArticulosDAO implements Serializable{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            
+            System.out.println("llega aqui");
             session.save(dto.getEntidad());
-            
+            System.out.println("aqui no");
             transaction.commit();
             
-        }catch(HibernateException he){
+        }
+        catch(HibernateException he){
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }            
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -115,5 +118,50 @@ public class OrdenArticulosDAO implements Serializable{
         }
         return lista;
     }
+
+    public List<OrdenArticulosDTO> leerRegistrosOrden(int id){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        List aux = null;
+        List<OrdenArticulosDTO> lista = new ArrayList<>();
+        try{
+            transaction.begin();
+            
+            Query q = session.createQuery("FROM OrdenArticulos WHERE idOrden= :idOrd").setParameter("idOrd", id);
+            aux = q.list();
+            for(int i = 0; i < aux.size(); i++){
+                OrdenArticulosDTO dto = new OrdenArticulosDTO();
+                dto.setEntidad((OrdenArticulos)aux.get(i));
+                lista.add(dto);
+            }
+            
+            
+            transaction.commit();
+            
+        }catch(HibernateException he){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }            
+        }
+        return lista;
+    }
     
+    
+    
+    
+    public static void main(String[] args) {
+        OrdenArticulosDTO dto = new OrdenArticulosDTO();
+        OrdenArticulosDAO dao = new OrdenArticulosDAO();
+        
+        dto.getEntidad().setCantidad(1);
+        dto.getEntidad().setIdOrden(2);
+        dto.getEntidad().setIdProducto(2);
+        dto.getEntidad().setIditem(2);
+        dto.getEntidad().setPrecio(100);
+        
+        dao.crear(dto);
+        
+        System.out.println(dao.leerTodos());
+        
+    }
 }

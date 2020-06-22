@@ -115,6 +115,16 @@ public class OrdenMB extends BaseBean implements Serializable {
         }
     }
     
+    public String prepareOrdenesCliente(int id){
+        try{
+            listaOrdenes = dao.leerOrdenesCliente(id);
+            return "/ordenes/listaOrdenesCliente?faces-redirect=true";
+        }catch(Exception e){
+            error("errorBusqueda", "Error al buscar");
+        }
+        return "/clientes/indexCliente?faces-redirect=true";
+    }
+    
     public void seleccionarProducto(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap()

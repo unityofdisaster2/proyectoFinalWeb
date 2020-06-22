@@ -6,6 +6,8 @@
 package com.ipn.mx.web.bean;
 
 import com.ipn.mx.modelo.dao.ClienteDAO;
+import com.ipn.mx.modelo.dao.OrdenArticulosDAO;
+import com.ipn.mx.modelo.dao.OrdenDAO;
 import com.ipn.mx.modelo.dto.ClienteDTO;
 
 import java.io.Serializable;
@@ -31,6 +33,8 @@ public class ClienteMB extends BaseBean implements Serializable {
     private ClienteDTO dto;
     private ClienteDAO dao = new ClienteDAO();
     private List<ClienteDTO> listaClientes;
+    private OrdenDAO ordenes = new OrdenDAO();
+    private OrdenArticulosDAO ordenArt = new OrdenArticulosDAO();
     private String mensaje;
 
     public String getMensaje() {
