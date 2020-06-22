@@ -113,7 +113,7 @@ public class LoginMB {
     public String logoutAdmin(){
         session.borrar("idAdmin");
         session.borrar("nombreAdmin");
-        return "index?faces-redirect=true";        
+        return "/index?faces-redirect=true";        
     }
     
 }
