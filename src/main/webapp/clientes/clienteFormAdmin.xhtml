@@ -5,17 +5,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-
       xmlns:p="http://primefaces.org/ui">
+
     <body>
 
-        <ui:composition template="./../plantillas/plantillaGeneral.xhtml">
+        <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
 
             <ui:define name="titulo">
-                <title>Creaci&oacute;n de usuario</title>
+                titulo
             </ui:define>
 
-            <ui:define name="contenido">
+            <ui:define name="content">
                 <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
                     <h5>Datos de usuario</h5>
                     <div class="dropdown-divider"></div>                
@@ -285,10 +285,13 @@
 
                             </div>
                             <p:messages></p:messages>
-                            <p:commandButton action="#{clienteMB.add()}" rendered="#{clienteMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear"/>
+                            <p:commandButton action="#{clienteMB.addFromAdmin()}" rendered="#{clienteMB.modoCrear}" class="btn btn-outline-primary" value="Crear"/>
+
+                            <p:commandButton action="#{clienteMB.adminUpdate()}" rendered="#{clienteMB.modoActualizar}" class="btn btn-outline-primary" value="Actualizar"/>
                         </h:form>
                     </f:view>
                 </div>
+
             </ui:define>
 
         </ui:composition>

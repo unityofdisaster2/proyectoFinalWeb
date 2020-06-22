@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                <title>
+                    Lista de categorias
+                </title>
+            </ui:define>
+
+            <ui:define name="content">
+                <c:choose>
+                    <c:when test="#{productoMB.mensaje == 'update'}">
+                        <script>
+                            alertify.success('Producto actualizado');
+                            #{productoMB.mensaje = ""}
+                        </script>
+                    </c:when>
+
+                    <c:when test="#{productoMB.mensaje == 'nuevo'}">
+                        <script>
+                            alertify.success('Producto agregado');
+                            #{productoMB.mensaje = ""}
+                        </script>
+                    </c:when>
+                </c:choose>
+
+                <div class="container">
+                    <f:view>
+                        <h:form>
+                            <div style="padding-bottom:10px"></div>
+
+
+                            <h:dataTable value="#{categoriaMB.listaCategorias}" var="dto" class="table table-hover table-responsive-sm table-dark table-bordered rounded">
+
+                                <h:column class="col">
+                                    <f:facet name="header">Id de categoria</f:facet>
+                                    <h:outputText value="#{dto.entidad.idCategoria}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Nombre</f:facet>
+                                    <h:outputText value="#{dto.entidad.nombre}"/>
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">Acciones</f:facet>
+
+                                    <p:commandButton class="btn btn-danger" value="Eliminar" actionListener="#{categoriaMB.seleccionarCategoria}" action="#{categoriaMB.borrar()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idCategoria}" />
+                                    </p:commandButton>
+                                    <p:commandButton class="btn btn-primary" value="Actualizar" actionListener="#{categoriaMB.seleccionarCategoria}" action="#{categoriaMB.prepareUpdate()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idCategoria}" />
+                                    </p:commandButton>
+
+                                </h:column>
+                            </h:dataTable>
+                            <p:commandButton class="btn btn-primary" value="Nuevo" action="#{categoriaMB.prepareAdd()}">
+
+                            </p:commandButton>                            
+                        </h:form>
+                    </f:view>
+                </div>
+                <div style="padding-bottom: 150px"></div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -9,7 +9,9 @@ import com.ipn.mx.modelo.dao.ClienteDAO;
 import com.ipn.mx.modelo.dto.ClienteDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -29,7 +31,17 @@ public class ClienteMB extends BaseBean implements Serializable {
     private ClienteDTO dto;
     private ClienteDAO dao = new ClienteDAO();
     private List<ClienteDTO> listaClientes;
+    private String mensaje;
 
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+    
     public ClienteMB() {
     }
 
@@ -57,6 +69,14 @@ public class ClienteMB extends BaseBean implements Serializable {
         this.listaClientes = listaClientes;
     }
 
+    @PostConstruct
+    public void init(){
+        listaClientes = new ArrayList<>();
+        listaClientes = dao.leerTodos();
+        
+    }
+
+
     public String prepareAdd() {
         dto = new ClienteDTO();
         setAccion(ACC_CREAR);
@@ -64,11 +84,31 @@ public class ClienteMB extends BaseBean implements Serializable {
 
     }
 
-    public String prepareUpdate() {
-        setAccion(ACC_ACTUALIZAR);
-        return "/clientes/clienteForm?faces-redirect=true";
+    public String prepareAddFromAdmin() {
+        dto = new ClienteDTO();
+        setAccion(ACC_CREAR);
+        return "/clientes/clienteFormAdmin?faces-redirect=true";
+
     }
 
+
+    public String prepareUpdateAdmin() {
+        setAccion(ACC_ACTUALIZAR);
+        return "/clientes/clienteFormAdmin?faces-redirect=true";
+    }
+    public String prepareUpdateCliente() {
+        setAccion(ACC_ACTUALIZAR);
+        return "/clientes/clienteFormCliente?faces-redirect=true";
+    }
+    
+
+
+    public String prepareIndex() {
+        init();
+        return "/clientes/listaClientes?faces-redirect=true";
+    }
+    
+    // creacion de usuario desde vista general
     public String add() {
         try {
             dao.crear(dto);
@@ -80,13 +120,35 @@ public class ClienteMB extends BaseBean implements Serializable {
 
     }
 
-    public String update() {
+    public String addFromAdmin() {
+        try {
+            dao.crear(dto);
+            return "/clientes/listaClientes?faces-redirect=true";
+        } catch (Exception e) {
+            error("errorCrearCliente", "Error al crear cliente");
+            return "/clientes/clienteFormAdmin?faces-redirect=true";
+        }
+
+    }
+
+    public String clienteUpdate() {
         try {
             dao.actualizar(dto);
-            return "/general/loginPage?faces-redirect=true";
+            return "/clientes/indexCliente?faces-redirect=true";
         } catch (Exception e) {
             error("errorActualizarCliente", "Error al actualizar cliente");
-            return "/clientes/clienteForm?faces-redirect=true";
+            return "/clientes/clienteFormCliente?faces-redirect=true";
+        }
+
+    }
+
+    public String adminUpdate() {
+        try {
+            dao.actualizar(dto);
+            return "/clientes/listaClientes?faces-redirect=true";
+        } catch (Exception e) {
+            error("errorActualizarCliente", "Error al actualizar cliente");
+            return "/clientes/clienteFormAdmin?faces-redirect=true";
         }
 
     }
@@ -94,10 +156,10 @@ public class ClienteMB extends BaseBean implements Serializable {
     public String borrar() {
         try {
             dao.eliminar(dto);
-            return "/general/loginPage?faces-redirect=true";
+            return prepareIndex();
         } catch (Exception e) {
             error("errorBorrarCliente", "Error al borrar el cliente");
-            return "/general/loginPage?faces-redirect=true";
+            return "/clientes/clienteFormAdmin?faces-redirect=true";
         }
     }
     
@@ -113,4 +175,14 @@ public class ClienteMB extends BaseBean implements Serializable {
             ex.printStackTrace();
         }
     }    
+
+    public void mostrarMensaje(ActionEvent event) {
+        mensaje = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("activar");
+        
+    }
+
+    
+    
 }

@@ -34,6 +34,15 @@ public class ProductoMB extends BaseBean implements Serializable {
     private ProductoDAO dao = new ProductoDAO();
     private List<ProductoDTO> listaProductos;
     private Part archivo;
+    private String mensaje;
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
     
     
     public ProductoMB() {
@@ -101,6 +110,11 @@ public class ProductoMB extends BaseBean implements Serializable {
         return "/productos/listaProductos?faces-redirect=true";
     }
 
+    public String prepareAdminIndex() {
+        init();
+        return "/productos/listaProdAdmin?faces-redirect=true";
+    }
+
     public String crear() {
         try {
             byte[] bytes = new byte[(int)archivo.getSize()];
@@ -108,36 +122,33 @@ public class ProductoMB extends BaseBean implements Serializable {
             dis.readFully(bytes);
             dto.getEntidad().setImagen(bytes);
             dao.crear(dto);
-            return prepareIndex();
+            return prepareAdminIndex();
         } catch (Exception e) {
             error("errorCrearEvento", "Error al crear el evento");
-            return "/productos/listaProductos?faces-redirect=true";
+            return "/productos/listaProdAdmin?faces-redirect=true";
         }
     }
 
     public String actualizar() {
         try {
             dao.actualizar(dto);
-            return prepareIndex();
+            return prepareAdminIndex();
         } catch (Exception e) {
             error("errorActualizarEvento", "Error al actualizar el evento");
-            return "/productos/listaProductos?faces-redirect=true";
+            return "/productos/listaProdAdmin?faces-redirect=true";
         }
     }
 
     public String borrar() {
         try {
             dao.eliminar(dto);
-            return prepareIndex();
+            return prepareAdminIndex();
         } catch (Exception e) {
             error("errorBorrarEvento", "Error al borrar el evento");
-            return "/productos/listaProductos?faces-redirect=true";
+            return "/productos/listaProdAdmin?faces-redirect=true";
         }
     }
-    
-    public void algo(){
-        
-    }
+
     
     public void seleccionarProducto(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
@@ -151,4 +162,14 @@ public class ProductoMB extends BaseBean implements Serializable {
             ex.printStackTrace();
         }
     }
+
+    
+    public void mostrarMensaje(ActionEvent event) {
+        mensaje = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("activar");
+        
+    }
+    
+    
 }

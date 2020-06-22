@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,129 +21,129 @@
     </h:head>
 
     <h:body style="padding-top:76px;background-image: url(#{request.contextPath}/resources/imgs/fondo3.png)">
+        <c:choose>
+            <c:when test="#{idCliente == null and idAdmin == null}">
+                <h:outputText value="#{idCliente}"/>
+                <h:outputText value="#{idAdmin}"/>
+                <div id="header">
+                    <ui:insert name="header">
+                        <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+                            <h:form id="frmLogo">
+                                <h:commandLink action="/index?faces-redirect=true" class="navbar-brand">
+                                    <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
+                                    Snkr Store
+                                </h:commandLink>
+                            </h:form>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <h:form id="frmNav">
+                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="/index?faces-redirect=true">Home</h:commandLink> 
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="/productos/listaProductos?faces-redirect=true" value="lista de productos" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="/general/loginCliente?faces-redirect=true">Iniciar Sesi&oacute;n</h:commandLink> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
+                        </nav>
 
-        <div id="header">
-            <ui:insert name="header">
-                <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
-                    <h:form id="frmLogo">
-                        <h:commandLink action="/index?faces-redirect=true" class="navbar-brand">
-                            <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
-                            Snkr Store
-                        </h:commandLink>
-                    </h:form>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <h:form id="frmNav">
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <h:commandLink class="nav-link" action="/index?faces-redirect=true">Home</h:commandLink> 
-                                </li>
-                                <li class="nav-item">
-                                    <h:commandLink class="nav-link" action="/productos/listaProductos?faces-redirect=true" value="lista de productos" />
-                                </li>
-                                <li class="nav-item">
-                                    <h:commandLink class="nav-link" action="/general/loginCliente?faces-redirect=true">Iniciar Sesi&oacute;n</h:commandLink> 
-                                </li>
-                            </ul>
-                        </div>
-                    </h:form>
-                </nav>
+                    </ui:insert>
+                </div>
 
-            </ui:insert>
-        </div>
+                <div id="contenido" class="center_content">
+                    <ui:insert name="contenido">Content</ui:insert>
+                </div>
 
-        <div id="contenido" class="center_content">
-            <ui:insert name="contenido">Content</ui:insert>
-        </div>
+                <div id="footer">
+                    <ui:insert name="footer">
+                        <!-- Footer -->
+                        <footer class="page-footer font-small blue pt-4" style="background-color: black;color: white">
 
-        <div id="footer">
-            <ui:insert name="footer">
-                <!-- Footer -->
-                <footer class="page-footer font-small blue pt-4" style="background-color: black;color: white">
+                            <!-- Footer Links -->
+                            <div class="container-fluid text-center text-md-left">
 
-                    <!-- Footer Links -->
-                    <div class="container-fluid text-center text-md-left">
+                                <!-- Grid row -->
+                                <div class="row">
 
-                        <!-- Grid row -->
-                        <div class="row">
+                                    <!-- Grid column -->
+                                    <div class="col-md-6 mt-md-0 mt-3">
 
-                            <!-- Grid column -->
-                            <div class="col-md-6 mt-md-0 mt-3">
+                                        <!-- Content -->
+                                        <h5 class="text-uppercase">Escuela Superior de C&oacute;mputo</h5>
 
-                                <!-- Content -->
-                                <h5 class="text-uppercase">Footer Content</h5>
-                                <p>Here you can use rows and columns to organize your footer content.</p>
+                                    </div>
+                                    <!-- Grid column -->
 
-                            </div>
-                            <!-- Grid column -->
+                                    <hr class="clearfix w-100 d-md-none pb-3"/>
 
-                            <hr class="clearfix w-100 d-md-none pb-3"/>
+                                    <!-- Grid column -->
+                                    <div class="col-md-3 mb-md-0 mb-3">
 
-                            <!-- Grid column -->
-                            <div class="col-md-3 mb-md-0 mb-3">
+                                        <!-- Links -->
+                                        <h5 class="text-uppercase">Administrador</h5>
 
-                                <!-- Links -->
-                                <h5 class="text-uppercase">Links</h5>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <h:form>
+                                                    <h:commandLink action="/general/loginAdmin?faces-redirect=true">
+                                                        Iniciar Sesi&oacute;n
+                                                    </h:commandLink>
+                                                </h:form>
+                                            </li>
+                                        </ul>
 
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="#!">Link 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 4</a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <!-- Grid column -->
 
-                            </div>
-                            <!-- Grid column -->
 
-                            <!-- Grid column -->
-                            <div class="col-md-3 mb-md-0 mb-3">
+                                    <!-- Grid column -->
 
-                                <!-- Links -->
-                                <h5 class="text-uppercase">Links</h5>
-
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="#!">Link 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Link 4</a>
-                                    </li>
-                                </ul>
+                                </div>
+                                <!-- Grid row -->
 
                             </div>
-                            <!-- Grid column -->
+                            <!-- Footer Links -->
 
-                        </div>
-                        <!-- Grid row -->
+                            <!-- Copyright -->
+                            <div class="footer-copyright text-center py-3">2020: Raymundo Rosales Reyes, Irving Aguiar Hernandez
+                            </div>
+                            <!-- Copyright -->
 
-                    </div>
-                    <!-- Footer Links -->
+                        </footer>
+                        <!-- Footer -->
+                    </ui:insert>
+                </div>
 
-                    <!-- Copyright -->
-                    <div class="footer-copyright text-center py-3">2020: Raymundo Rosales Reyes, Irving Aguiar Hernandez
-                    </div>
-                    <!-- Copyright -->
+            </c:when>
 
-                </footer>
-                <!-- Footer -->
-            </ui:insert>
-        </div>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="#{idCliente != null}">
+                        <script>
+                            window.location.replace("#{request.contextPath}/faces/clientes/indexCliente.xhtml");
+                        </script>
+                    </c:when>
+                    <c:otherwise>
+                        <script>
+                            window.location.replace("#{request.contextPath}/faces/administrador/indexAdministrador.xhtml");
+                        </script>                        
+                    </c:otherwise>
+                </c:choose>
+                <c:if test="#{idCliente != null}">
+                    
+                </c:if>
+                
+
+                asdsad
+            </c:otherwise>
+        </c:choose>
 
     </h:body>
 

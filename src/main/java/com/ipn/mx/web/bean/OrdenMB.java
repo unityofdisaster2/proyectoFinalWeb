@@ -115,7 +115,7 @@ public class OrdenMB extends BaseBean implements Serializable {
         }
     }
     
-    public void seleccionarOrden(ActionEvent event) {
+    public void seleccionarProducto(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap()
                 .get("claveSel");

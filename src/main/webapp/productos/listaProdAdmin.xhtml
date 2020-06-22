@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:oou="http://omnifaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                <title>Lista de productos</title>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <c:choose>
+                    <c:when test="#{productoMB.mensaje == 'update'}">
+                        <script>
+                            alertify.success('Producto actualizado');
+                            #{productoMB.mensaje = ""}
+                        </script>
+                    </c:when>
+
+                    <c:when test="#{productoMB.mensaje == 'nuevo'}">
+                        <script>
+                            alertify.success('Producto agregado');
+                            #{productoMB.mensaje = ""}
+                        </script>
+                    </c:when>
+                </c:choose>
+
+                <div class="container">
+                    <f:view>
+                        <h:form>
+                            <div style="padding-bottom:10px"></div>
+                            <table class="table table-hover table-responsive-sm table-dark rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">id</th>
+                                        <th scope="col">nombre</th>
+                                        <th scope="col">stock</th>
+                                        <th scope="col">precio</th>
+                                        <th scope="col">imagen</th>
+                                        <th scope="col">acciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <ui:repeat value="#{productoMB.listaProductos}" var ="dto">
+                                        <tr>
+                                            <th scope="row"><h:outputText value="#{dto.entidad.idProducto}"/></th>
+                                            <td><h:outputText value="#{dto.entidad.nombre}"/></td>
+                                            <td><h:outputText value="#{dto.entidad.stock}"/></td>
+                                            <td><h:outputText value="$#{dto.entidad.precio}"/></td>
+                                            <td><oou:graphicImage value="#{dto.entidad.imagen}" dataURI="true" width="100" height="100"/></td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p:commandButton update="@form" class="btn btn-danger" value="Eliminar" actionListener="#{productoMB.seleccionarProducto(event)}" action="#{productoMB.borrar()}">
+                                                            <f:param name="claveSel" value="#{dto.entidad.idProducto}" />
+                                                        </p:commandButton>
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <p:commandButton class="btn btn-primary" value="Actualizar" actionListener="#{productoMB.seleccionarProducto(event)}" action="#{productoMB.prepareUpdate()}">
+                                                            <f:param name="claveSel" value="#{dto.entidad.idProducto}" />
+                                                        </p:commandButton>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
+                            <p:commandButton class="btn btn-primary" value="Nuevo" action="#{productoMB.prepareAdd()}">
+
+                            </p:commandButton>                            
+                        </h:form>
+                    </f:view>
+                </div>
+                <div style="padding-bottom: 150px"></div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

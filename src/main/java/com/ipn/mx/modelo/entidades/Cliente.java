@@ -142,7 +142,9 @@ public class Cliente implements Serializable{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
+    
+    
+    
     @Override
     public String toString() {
         return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", paterno=" + paterno + ", materno=" + materno + ", telefono=" + telefono + ", email=" + email + ", calle=" + calle + ", numero=" + numero + ", estado=" + estado + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal + ", usuario=" + usuario + ", contrasena=" + contrasena + '}';

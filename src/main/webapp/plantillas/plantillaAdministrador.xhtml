@@ -7,18 +7,67 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="alertify.min.css"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputScript library="js" name="jquery-3.5.1.min.js"/>
         <h:outputScript library="js" name="popper.min.js"/>
-        <h:outputScript library="js" name="bootstrap.min.js"/>          
-        <title>Administrador</title>
+        <h:outputScript library="js" name="bootstrap.min.js"/>
+        <h:outputScript library="js" name="alertify.min.js"/>
+        <h:outputScript library="js" name="sweetalert2.all.min.js"/>
+        <div id="titulo">
+            <ui:insert name="titulo">
+                <title>administrador</title>
+            </ui:insert>
+        </div>
     </h:head>
 
     <h:body style="padding-top:76px;background-image: url(#{request.contextPath}/resources/imgs/fondo3.png)">
         <c:choose>
             <c:when test="#{idAdmin != null}">
                 <div id="top">
-                    <ui:insert name="top">Top</ui:insert>
+                    <ui:insert name="top">
+                        <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+                            <h:form id="frmLogo">
+                                <h:commandLink action="/administrador/indexAdministrador?faces-redirect=true" class="navbar-brand">
+                                    <h:graphicImage library="imgs" name="ico3.png" width="50" height="50"/>
+                                    Snkr Store
+                                </h:commandLink>
+                            </h:form>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <h:form id="frmNav">
+                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareIndex()}">Lista de Clientes</h:commandLink> 
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{productoMB.prepareAdminIndex()}" value="Lista de productos" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{categoriaMB.prepareIndex()}" value="Lista de categorias" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Lista de ordenes" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Grafica de ventas" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Reporte de ventas" />
+                                        </li>
+                                        <li class="nav-item">
+                                            <h:commandLink class="nav-link" action="#{loginMB.logoutAdmin()}">Cerrar Sesi&oacute;n</h:commandLink> 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
+                        </nav>
+
+
+
+                    </ui:insert>
                 </div>
 
                 <div id="content" class="center_content">
@@ -26,15 +75,53 @@
                 </div>
 
                 <div id="bottom">
-                    <ui:insert name="bottom">Bottom</ui:insert>
+                    <ui:insert name="bottom">
+                        <!-- Footer -->
+                        <footer class="page-footer font-small blue pt-4" style="background-color: black;color: white">
+
+                            <!-- Footer Links -->
+                            <div class="container-fluid text-center text-md-left">
+
+                                <!-- Grid row -->
+                                <div class="row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+
+                                        <!-- Content -->
+                                        <h5 class="text-uppercase">Escuela Superior de C&oacute;mputo</h5>
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                    <hr class="clearfix w-100 d-md-none pb-3"/>
+
+
+
+                                </div>
+                                <!-- Grid row -->
+
+                            </div>
+                            <!-- Footer Links -->
+
+                            <!-- Copyright -->
+                            <div class="footer-copyright text-center py-3">2020: Raymundo Rosales Reyes, Irving Aguiar Hernandez
+                            </div>
+                            <!-- Copyright -->
+
+                        </footer>
+                        <!-- Footer -->                        
+                    </ui:insert>
                 </div>                
             </c:when> 
             <c:otherwise>
-                        
-                    <script>
-                        window.location.replace("#{request.contextPath}");
-                    </script>
-                       
+
+                <script>
+                    window.location.replace("#{request.contextPath}");
+                </script>
+
             </c:otherwise>
 
         </c:choose>

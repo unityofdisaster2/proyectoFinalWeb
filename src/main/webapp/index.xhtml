@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 
     <h:body>
@@ -10,17 +11,55 @@
             <ui:define name="contenido">
                 <!--
                 <ui:include src="productos/prueba.xhtml"></ui:include>-->
-                
+
                 <h:form id="frmInicio">
-                    <h:commandLink action="#{productoMB.prepareAdd()}">Nuevo Producto</h:commandLink>
-                    <br></br>
-                    <h:commandLink action="#{clienteMB.prepareAdd()}">Nuevo cliente</h:commandLink>
-                    <br></br>
-                    <h:commandLink action="#{productoMB.prepareIndex()}">lista de productos</h:commandLink>
-                    <br></br>
-                    <h:commandLink action="/general/loginPage">Login page</h:commandLink>
-                    <br></br>
-                    <h:commandLink action="/administrador/indexAdministrador">Admin</h:commandLink>                    
+                    <div class="container">
+                        <center>
+
+
+                            <h1 class="container-sm p-3 my-3 bg-white shadow-lg rounded border">Bienvenido</h1>
+                        </center>
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <h:graphicImage class= "d-block w-100" library="imgs" name="carousel1.jpg" width="720" height="420" alt="first slide"/>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        
+                                        <h:commandButton action="/general/loginPage?faces-redirect=true" value="Comprar" class="btn btn-lg btn-secondary"/>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <h:graphicImage class= "d-block w-100" library="imgs" name="carousel3.jpg" width="720" height="420" alt="first slide"/>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        
+                                        <h:commandButton action="/general/loginPage?faces-redirect=true" value="Comprar" class="btn btn-lg btn-secondary"/>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <h:graphicImage class= "d-block w-100" library="imgs" name="carousel3.png" width="750" height="450" alt="first slide"/>
+
+                                    <div class="carousel-caption d-none d-md-block">
+                                        
+                                        <h:commandButton action="/general/loginPage?faces-redirect=true" value="Comprar" class="btn btn-lg btn-secondary"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>                        
+                    </div>
+
                 </h:form>
             </ui:define>
         </ui:composition>

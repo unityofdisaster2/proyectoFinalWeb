@@ -8,6 +8,7 @@ package com.ipn.mx.modelo.dao;
 import com.ipn.mx.modelo.dto.AdministradorDTO;
 import com.ipn.mx.modelo.entidades.Administrador;
 import com.ipn.mx.utilerias.HibernateUtil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -19,7 +20,7 @@ import org.hibernate.query.Query;
  *
  * @author unityofdisaster
  */
-public class AdministradorDAO {
+public class AdministradorDAO implements Serializable{
     public void crear(AdministradorDTO dto){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();
@@ -94,7 +95,14 @@ public class AdministradorDAO {
         try{
             transaction.begin();
             
-            dto.setEntidad(session.get(dto.getEntidad().getClass(), dto.getEntidad().getUsuario()));
+            String hql = "FROM Administrador a WHERE a.usuario = :user";
+            List result = session.createQuery(hql).setParameter("user", dto.getEntidad().getUsuario()).list();
+            if(result.size() > 0 ){
+                dto.setEntidad((Administrador)result.get(0));
+            }else{
+                dto = null;
+            }
+            
             
             transaction.commit();
             
@@ -106,6 +114,8 @@ public class AdministradorDAO {
         return dto;
     }
 
+    
+    
     public List<AdministradorDTO> leerTodos(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();

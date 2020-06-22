@@ -121,7 +121,7 @@ public class ClienteDAO {
         try{
             transaction.begin();
             
-            Query q = session.createQuery("FROM Cliente");
+            Query q = session.createQuery("FROM Cliente c ORDER BY c.idCliente");
             aux = q.list();
             for(int i = 0; i < aux.size(); i++){
                 ClienteDTO dto = new ClienteDTO();

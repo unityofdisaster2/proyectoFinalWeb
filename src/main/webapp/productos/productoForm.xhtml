@@ -8,14 +8,14 @@
 
     <body>
 
-        <ui:composition template="./../plantillas/plantillaGeneral.xhtml">
+        <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
             <ui:define name="titulo">
                 <title>Agregar producto</title>
             </ui:define>
-            <ui:define name="contenido">
+            <ui:define name="content">
                 <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
                     <h5>Datos del producto</h5>
-                    <div class="dropdown-divider"></div>  
+                    <div class="dropdown-divider"></div>
                     <f:view>
                         <h:form id="frmProducto" enctype="multipart/form-data">
                             <h:inputHidden value="#{productoMB.accion}"/>
@@ -143,8 +143,6 @@
                                     <h:inputFile
                                         id="flImagen"
                                         value="#{productoMB.archivo}"
-                                        required="true"
-                                        requiredMessage="Introduzca una imagen"
                                         class="custom-file-input"
                                         />
                                 </div>
@@ -153,13 +151,17 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <h:commandButton value="Nuevo" action="#{productoMB.crear()}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary"/>
+                                    <p:commandButton value="Nuevo" action="#{productoMB.crear()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoCrear}" class="btn btn-outline-primary">
+                                        <f:param name="activar" value="nuevo"></f:param>
+                                    </p:commandButton>
                                 </div>
                                 <div class="col">
-                                    <h:commandButton value="Actualizar" action="#{productoMB.actualizar()}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary"/>
                                 </div>
+
                                 <div class="col">
-                                    <h:commandButton value="Regresar" action="#{productoMB.back()}" class="btn btn-outline-info"/>
+                                    <p:commandButton value="Actualizar" action="#{productoMB.actualizar()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{productoMB.modoActualizar}" class="btn btn-primary">
+                                        <f:param name="activar" value="update"/>
+                                    </p:commandButton>
                                 </div>
                             </div>
 

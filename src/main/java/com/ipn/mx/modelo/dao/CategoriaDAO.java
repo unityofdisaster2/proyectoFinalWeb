@@ -8,6 +8,7 @@ package com.ipn.mx.modelo.dao;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.entidades.Categoria;
 import com.ipn.mx.utilerias.HibernateUtil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -19,7 +20,7 @@ import org.hibernate.query.Query;
  *
  * @author unityofdisaster
  */
-public class CategoriaDAO {
+public class CategoriaDAO implements Serializable{
     public void crear(CategoriaDTO dto){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();
@@ -96,7 +97,7 @@ public class CategoriaDAO {
         try{
             transaction.begin();
             
-            Query q = session.createQuery("FROM Categoria");
+            Query q = session.createQuery("FROM Categoria c ORDER BY c.idCategoria");
             aux = q.list();
             for(int i = 0; i < aux.size(); i++){
                 CategoriaDTO dto = new CategoriaDTO();

@@ -5,28 +5,55 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:oou="http://omnifaces.org/ui">
+      xmlns:oou="http://omnifaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="../plantillas/plantillaGeneral.xhtml">
             <ui:define name="contenido">
                 <center style="padding-top: 10px">
+                    <c:if test="#{activar == 'update'}">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>                        
+                    </c:if>
                     <f:view>
                         <h:form id="frmListaProductos">
 
                             <div class="card-group">
                                 <ui:repeat value="#{productoMB.listaProductos}" var="productos">
                                     <div class="col mb-4">
-                                        <div class="card" style="width: 250px;">
-                                            <oou:graphicImage value="#{productos.entidad.imagen}" dataURI="true" width="250" height="250"/>                                            
+                                        <div class="card" style="width: 350px;">
+                                            <oou:graphicImage value="#{productos.entidad.imagen}" dataURI="true" width="250" height="250"/>
                                             <!--
                                             <p:graphicImage value="/imagen?id=#{productos.entidad.idProducto}" width="250" height="250"></p:graphicImage>
                                             -->
                                             <div class="card-body">
-                                                <h5 class="card-title"><h:outputText value="#{productos.entidad.nombre}"/></h5>
-                                                <p class="card-text"><h:outputText value="#{productos.entidad.descripcion}"/> </p>
-                                                <p class="card-text"><h:outputText value="#{productos.entidad.precio}"/> </p>
+                                                <div class="row">
+                                                    <div class="col col-sm-6">
+                                                        <h6 class="card-title"><h:outputText value="#{productos.entidad.nombre}"/></h6>
+
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>
+                                                    <div class="col col-sm-4">
+                                                        <p class="card-text"><h:outputText value="$#{productos.entidad.precio}"/> </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="card-text text-muted"><h:outputText value="#{productos.entidad.descripcion}"/> </p>
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>                                                    
+                                                </div>
+
                                                 <p class="card-text"><h:outputText value="#{productos.entidad.stock} disponibles"/> </p>
                                             </div>
                                             <div class="card-footer">
@@ -36,7 +63,7 @@
                                                         <h:commandButton value="comprar" action="/general/loginCliente?faces-redirect=true" class="btn btn-primary" />
                                                     </div>
                                                     <div class="col"></div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
