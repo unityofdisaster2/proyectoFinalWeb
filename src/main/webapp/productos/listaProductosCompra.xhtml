@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:oou="http://omnifaces.org/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaCliente.xhtml">
+
+            <ui:define name="titulo">
+                <style>comprar productos</style>
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>#{productoMB.mensaje}</h1>
+                <c:if test="#{productoMB.mensaje == 'agregado'}">
+                    <script>
+                        alertify.success('Producto agregado al carrito');
+                    </script>
+                    #{productoMB.mensaje = ""}
+                </c:if>
+                
+                
+                <style>
+                    .inputOnTable input{
+                        width: 50px !important;
+                    }
+                </style>
+                <center style="padding-top: 10px">
+
+                    <f:view>
+                        <h:form id="frmListaProductosCompra">
+
+                            <div class="card-group">
+                                <ui:repeat value="#{productoMB.listaProductos}" var="productos" varStatus="estado">
+                                    <div class="col mb-4">
+                                        <div class="card" style="width: 350px;">
+                                            <oou:graphicImage value="#{productos.entidad.imagen}" dataURI="true" width="250" height="250"/>
+                                            <!--
+                                            <p:graphicImage value="/imagen?id=#{productos.entidad.idProducto}" width="250" height="250"></p:graphicImage>
+                                            -->
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col col-sm-6">
+                                                        <h6 class="card-title"><h:outputText value="#{productos.entidad.nombre}"/></h6>
+
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>
+                                                    <div class="col col-sm-4">
+                                                        <p class="card-text"><h:outputText value="$#{productos.entidad.precio}"/> </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="card-text text-muted"><h:outputText value="#{productos.entidad.descripcion}"/> </p>
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>                                                    
+                                                </div>
+
+                                                <p class="card-text"><h:outputText value="#{productos.entidad.stock} disponibles"/> </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <div class="col">
+                                                    </div>
+                                                    <div class="col">
+                                                        <p:inputNumber 
+                                                            id="txtCantidad"
+                                                            value="#{productoMB.cantidad[estado.index]}"
+                                                            styleClass="inputOnTable"
+                                                            
+                                                            maxValue="#{productos.entidad.stock}"
+                                                            />
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="row" style="padding-top: 10px">
+                                                    <div class="col">
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <p:commandButton class="btn btn-primary" action="#{productoMB.agregarProducto()}" actionListener="#{productoMB.seleccionarProductoCompra(event)}" value="agregar">
+                                                            <f:param name="claveSel" value="#{productos.entidad.idProducto}"/>
+                                                        </p:commandButton>
+
+                                                    </div>
+                                                    <div class="col">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </h:form>
+                    </f:view>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

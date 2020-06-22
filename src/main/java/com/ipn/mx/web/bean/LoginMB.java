@@ -10,6 +10,7 @@ import com.ipn.mx.modelo.dao.ClienteDAO;
 import com.ipn.mx.modelo.dto.AdministradorDTO;
 import com.ipn.mx.modelo.dto.ClienteDTO;
 import com.ipn.mx.utilerias.SessionUtil;
+import java.util.HashMap;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -27,14 +28,15 @@ public class LoginMB {
     /**
      * Creates a new instance of LoginMB
      */
-    private SessionUtil session = new SessionUtil();
+    private final SessionUtil session = new SessionUtil();
     private String usuario;
     private String pass;
     private ClienteDTO dtoCliente;
     private AdministradorDTO dtoAdmin;
     private final ClienteDAO daoCliente = new ClienteDAO();
     private final AdministradorDAO daoAdmin = new AdministradorDAO();
-
+    
+    
     public LoginMB() {
     }
 
@@ -54,6 +56,8 @@ public class LoginMB {
         this.pass = pass;
     }
     
+
+    
     
 
 
@@ -68,8 +72,10 @@ public class LoginMB {
         auxDto = daoCliente.leerCredenciales(dtoCliente);
         if(auxDto != null){
             if(usuario.equals(auxDto.getEntidad().getUsuario()) && pass.equals(auxDto.getEntidad().getContrasena())){
+                HashMap<Integer, Integer> estructuraCarrito =  new HashMap<>();
                 session.agregar("idCliente", dtoCliente.getEntidad().getIdCliente());
                 session.agregar("nombreCliente", dtoCliente.getEntidad().getNombre());
+                session.agregar("carrito", estructuraCarrito);
                 return "/clientes/indexCliente?faces-redirect=true";
             }            
         }
@@ -99,6 +105,7 @@ public class LoginMB {
     }
     
     public String logoutCliente(){
+        session.borrar("carrito");
         session.borrar("idCliente");
         session.borrar("nombreCliente");
         return "/index?faces-redirect=true";

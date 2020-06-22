@@ -17,8 +17,8 @@ public class SessionUtil implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(llave, valor);
     }
     
-    public void obtener(String llave){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(llave);
+    public Object obtener(String llave){
+        return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(llave);
     }
     
     public void borrar(String llave){

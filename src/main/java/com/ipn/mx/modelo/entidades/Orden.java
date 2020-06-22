@@ -33,8 +33,6 @@ public class Orden  implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
     private int idCliente;
-    private int idTienda;
-    private int idStaff;
 
     public Orden() {
     }
@@ -79,27 +77,7 @@ public class Orden  implements Serializable{
         this.idCliente = idCliente;
     }
 
-    public int getIdTienda() {
-        return idTienda;
-    }
 
-    public void setIdTienda(int idTienda) {
-        this.idTienda = idTienda;
-    }
-
-    public int getIdStaff() {
-        return idStaff;
-    }
-
-    public void setIdStaff(int idStaff) {
-        this.idStaff = idStaff;
-    }
-
-    @Override
-    public String toString() {
-        return "Orden{" + "idOrden=" + idOrden + ", fechaOrden=" + fechaOrden + ", fechaEnvio=" + fechaEnvio + ", fechaEntrega=" + fechaEntrega + ", idCliente=" + idCliente + ", idTienda=" + idTienda + ", idStaff=" + idStaff + '}';
-    }
-    
     
 
 }

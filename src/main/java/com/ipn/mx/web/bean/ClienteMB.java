@@ -96,8 +96,11 @@ public class ClienteMB extends BaseBean implements Serializable {
         setAccion(ACC_ACTUALIZAR);
         return "/clientes/clienteFormAdmin?faces-redirect=true";
     }
-    public String prepareUpdateCliente() {
+    public String prepareUpdateCliente(String numCliente) {
         setAccion(ACC_ACTUALIZAR);
+        dto = new ClienteDTO();
+        dto.getEntidad().setIdCliente(Integer.parseInt(numCliente));
+        dto = dao.leerUno(dto);
         return "/clientes/clienteFormCliente?faces-redirect=true";
     }
     

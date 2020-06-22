@@ -14,10 +14,13 @@
             </ui:insert>
         </div>
 
+        <h:outputStylesheet library="css" name="alertify.min.css"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputScript library="js" name="jquery-3.5.1.min.js"/>
         <h:outputScript library="js" name="popper.min.js"/>
-        <h:outputScript library="js" name="bootstrap.min.js"/>        
+        <h:outputScript library="js" name="bootstrap.min.js"/>     
+        <h:outputScript library="js" name="alertify.min.js"/>
+        <h:outputScript library="js" name="sweetalert2.all.min.js"/>        
     </h:head>
 
     <h:body style="padding-top:76px;background-image: url(#{request.contextPath}/resources/imgs/fondo3.png)">
@@ -137,9 +140,9 @@
                     </c:otherwise>
                 </c:choose>
                 <c:if test="#{idCliente != null}">
-                    
+
                 </c:if>
-                
+
 
                 asdsad
             </c:otherwise>

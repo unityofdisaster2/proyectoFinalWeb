@@ -8,6 +8,7 @@ package com.ipn.mx.modelo.dao;
 import com.ipn.mx.modelo.dto.ClienteDTO;
 import com.ipn.mx.modelo.entidades.Cliente;
 import com.ipn.mx.utilerias.HibernateUtil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -19,7 +20,7 @@ import org.hibernate.query.Query;
  *
  * @author unityofdisaster
  */
-public class ClienteDAO {
+public class ClienteDAO implements Serializable{
     public void crear(ClienteDTO dto){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = session.getTransaction();
