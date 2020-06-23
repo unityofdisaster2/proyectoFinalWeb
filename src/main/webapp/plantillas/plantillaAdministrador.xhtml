@@ -59,7 +59,8 @@
                                             <h:commandLink class="nav-link" action="#{ordenArticulosMB.generarGrafica()}" value="Grafica de ventas" />
                                         </li>
                                         <li class="nav-item">
-                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Reporte de ventas" />
+                                            <a class="nav-link" href="#{request.contextPath}/ReporteServlet?reporte=1" target="_blank">Reporte de ventas</a>
+
                                         </li>
                                         <li class="nav-item">
                                             <h:commandLink class="nav-link" action="#{loginMB.logoutAdmin()}">Cerrar Sesi&oacute;n</h:commandLink> 

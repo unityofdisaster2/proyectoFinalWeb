@@ -5,12 +5,15 @@
  */
 package com.ipn.mx.web.bean;
 
+import com.ipn.mx.modelo.dao.ClienteDAO;
 import com.ipn.mx.modelo.dao.OrdenArticulosDAO;
 import com.ipn.mx.modelo.dao.OrdenDAO;
 import com.ipn.mx.modelo.dao.ProductoDAO;
+import com.ipn.mx.modelo.dto.ClienteDTO;
 import com.ipn.mx.modelo.dto.OrdenArticulosDTO;
 import com.ipn.mx.modelo.dto.OrdenDTO;
 import com.ipn.mx.modelo.dto.ProductoDTO;
+import com.ipn.mx.utilerias.EmailUtil;
 import com.ipn.mx.utilerias.SessionUtil;
 import java.io.DataInputStream;
 
@@ -51,6 +54,7 @@ public class ProductoMB extends BaseBean implements Serializable {
     private int id;
     private int[] cantidad;
     private double total;
+    EmailUtil emailUtil = new EmailUtil();
     private HashMap<Integer, Integer> carritoLocal;
 
     public HashMap<Integer, Integer> getCarritoLocal() {
@@ -197,7 +201,10 @@ public class ProductoMB extends BaseBean implements Serializable {
                 List<OrdenDTO> listaAux = new ArrayList<>();
                 listaAux = ordenDAO.leerOrdenesCliente((Integer) sesion.obtener("idCliente"));
                 orDTO = listaAux.get(listaAux.size() - 1);
-
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Articulos:").append("\n\n");
+                sb.append("Nombre").append("\t\t").append("cantidad").append("\t\t").append("precio").append("\n\n");
                 int num = 1;
                 for (ProductoDTO producto : listaProductos) {
 
@@ -209,6 +216,14 @@ public class ProductoMB extends BaseBean implements Serializable {
                         ordArDTO.getEntidad().setCantidad(carritoLocal.get(producto.getEntidad().getIdProducto()));
                         ordArDTO.getEntidad().setIditem(num);
                         ordArDTO.getEntidad().setPrecio(producto.getEntidad().getPrecio());
+                        
+                        sb.append(producto.getEntidad().getNombre()).
+                                append("\t\t").
+                                append(carritoLocal.get(producto.getEntidad().getIdProducto())).
+                                append("\t\t").
+                                append(producto.getEntidad().getPrecio()).
+                                append("\n\n");
+                        
                         num++;
                         ordArtDAO.crear(ordArDTO);
                         
@@ -216,6 +231,8 @@ public class ProductoMB extends BaseBean implements Serializable {
                         dao.actualizar(producto);
                     }
                 }
+                
+                sb.append("\n\n").append("total:").append("\t").append(total);
 
                 carritoLocal.clear();
                 HashMap<Integer, Integer> carritoSesion = (HashMap<Integer, Integer>) sesion.obtener("carrito");
@@ -224,7 +241,13 @@ public class ProductoMB extends BaseBean implements Serializable {
                 for(int i = 0; i < cantidad.length; i++){
                     cantidad[i] = 0;
                 }
-
+                
+                ClienteDTO clDT = new ClienteDTO();
+                ClienteDAO clDA = new ClienteDAO();
+                clDT.getEntidad().setIdCliente((Integer) sesion.obtener("idCliente"));
+                clDT = clDA.leerUno(clDT);
+                
+                emailUtil.enviarEmail(clDT.getEntidad().getEmail(), "Resumen de compra", sb.toString());
                 return "/clientes/indexCliente?faces-redirect=true";
 
             } catch (Exception e) {

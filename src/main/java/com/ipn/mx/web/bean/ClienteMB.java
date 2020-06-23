@@ -121,8 +121,8 @@ public class ClienteMB extends BaseBean implements Serializable {
     public String add() {
         try {
             dao.crear(dto);
-            //emailutil.enviarEmail(dto.getEntidad().getEmail(), "Creacion de cuenta en Snkr Store", "Se ha creado la cuenta exitosamente");
-            return "/general/loginPage?faces-redirect=true";
+            emailutil.enviarEmail(dto.getEntidad().getEmail(), "Creacion de cuenta en Snkr Store", "Se ha creado la cuenta exitosamente");
+            return "/general/loginCliente?faces-redirect=true";
         } catch (Exception e) {
             error("errorCrearCliente", "Error al crear cliente");
             return "/clientes/clienteForm?faces-redirect=true";

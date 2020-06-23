@@ -5,6 +5,7 @@
  */
 package com.ipn.mx.utilerias;
 
+import java.io.Serializable;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -16,7 +17,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author unityofdisaster
  */
-public class EmailUtil {
+public class EmailUtil implements Serializable{
     public void enviarEmail(String correoDestinatario, String asunto, String texto){
         try{
             Properties p = new Properties();
@@ -47,6 +48,15 @@ public class EmailUtil {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        EmailUtil util = new EmailUtil();
+        StringBuilder sb = new StringBuilder();
+        sb.append("se ha comprado algo: ").append("esto es algo").append("\n");
+        sb.append("se ha comprado algo: ").append("esto es algo").append("\n");
+        sb.append("se ha comprado algo: ").append("esto es algo").append("\n");
+        sb.append("se ha comprado algo: ").append("esto es algo").append("\n");
+        util.enviarEmail("rollercoast673@gmail.com", "prueba", sb.toString());
     }
     
 }
