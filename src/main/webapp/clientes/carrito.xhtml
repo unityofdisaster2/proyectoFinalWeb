@@ -12,7 +12,7 @@
         <ui:composition template="./../plantillas/plantillaCliente.xhtml">
 
             <ui:define name="titulo">
-                titulo
+                <title>Carrito de compras</title>
             </ui:define>
 
             <ui:define name="content">
@@ -62,7 +62,9 @@
                                         <div class="dropdown-divider"></div>
                                     </div>                            
                                     <div class="row">
-                                        <h:commandButton value="Finalizar pedido" action="#{productoMB.finalizarPedido()}" class="btn btn-primary" />
+                                        <h:commandButton value="Finalizar pedido" actionListener="#{clienteMB.mostrarMensaje}" action="#{productoMB.finalizarPedido()}" class="btn btn-primary" >
+                                            <f:param name="activar" value="pedido_finalizado"/>
+                                        </h:commandButton>
 
 
                                     </div>                                    

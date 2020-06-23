@@ -5,7 +5,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -16,6 +17,16 @@
             </ui:define>
 
             <ui:define name="content">
+                <c:if test="#{clienteMB.mensaje == 'actualizado'}">  
+                    <script>
+                        Swal.fire(
+                                'Actualizado!',
+                                'Sus datos han sido actualizados correctamente',
+                                'success'
+                                );
+                    </script>
+                    #{clienteMB.mensaje = ""}
+                </c:if>                
                 <div class="container-sm p-3 my-3 bg-white shadow-lg rounded border" style="width:400px">
                     <h5>Datos de usuario</h5>
                     <div class="dropdown-divider"></div>                
@@ -285,7 +296,9 @@
 
                             </div>
                             <p:messages></p:messages>
-                            <p:commandButton action="#{clienteMB.clienteUpdate()}" rendered="#{clienteMB.modoActualizar}" class="btn btn-outline-primary" value="Actualizar"/>
+                            <p:commandButton action="#{clienteMB.clienteUpdate()}" actionListener="#{clienteMB.mostrarMensaje(event)}" rendered="#{clienteMB.modoActualizar}" class="btn btn-outline-primary" value="Actualizar">
+                                <f:param name="activar" value="actualizado"/>
+                            </p:commandButton>
                         </h:form>
                     </f:view>
                 </div>

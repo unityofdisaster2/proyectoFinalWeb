@@ -144,7 +144,7 @@ public class ClienteMB extends BaseBean implements Serializable {
     public String clienteUpdate() {
         try {
             dao.actualizar(dto);
-            return "/clientes/indexCliente?faces-redirect=true";
+            return "/clientes/clienteFormCliente?faces-redirect=true";
         } catch (Exception e) {
             error("errorActualizarCliente", "Error al actualizar cliente");
             return "/clientes/clienteFormCliente?faces-redirect=true";

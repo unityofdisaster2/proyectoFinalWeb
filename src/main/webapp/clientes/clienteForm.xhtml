@@ -285,7 +285,9 @@
 
                             </div>
                             <p:messages></p:messages>
-                            <p:commandButton action="#{clienteMB.add()}" rendered="#{clienteMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear"/>
+                            <p:commandButton action="#{clienteMB.add()}" rendered="#{clienteMB.modoCrear}" actionListener="#{clienteMB.mostrarMensaje(event)}" type="Submit" class="btn btn-outline-primary" value="Crear">
+                                <f:param name="activar" value="creado"/>
+                            </p:commandButton>
                         </h:form>
                     </f:view>
                 </div>
