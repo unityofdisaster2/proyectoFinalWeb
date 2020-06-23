@@ -31,7 +31,17 @@ public class CategoriaMB extends BaseBean implements Serializable {
     private CategoriaDTO dto;
     private CategoriaDAO dao = new CategoriaDAO();
     private List<CategoriaDTO> listaCategorias;
+    private String mensaje;
 
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+    
     public CategoriaDTO getDto() {
         return dto;
     }
@@ -129,5 +139,13 @@ public class CategoriaMB extends BaseBean implements Serializable {
             ex.printStackTrace();
         }
     }    
+
+    public void mostrarMensaje(ActionEvent event) {
+        mensaje = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("activar");
+        
+    }
+
     
 }

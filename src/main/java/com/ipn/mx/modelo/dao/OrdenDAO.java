@@ -125,7 +125,7 @@ public class OrdenDAO implements Serializable{
         try{
             transaction.begin();
             
-            Query q = session.createQuery("FROM Orden o WHERE o.idCliente= :idCli").setParameter("idCli", id);
+            Query q = session.createQuery("FROM Orden o WHERE o.idCliente= :idCli ORDER BY fechaEntrega asc").setParameter("idCli", id);
             aux = q.list();
             for(int i = 0; i < aux.size(); i++){
                 OrdenDTO dto = new OrdenDTO();

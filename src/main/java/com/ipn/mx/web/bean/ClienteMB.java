@@ -9,6 +9,7 @@ import com.ipn.mx.modelo.dao.ClienteDAO;
 import com.ipn.mx.modelo.dao.OrdenArticulosDAO;
 import com.ipn.mx.modelo.dao.OrdenDAO;
 import com.ipn.mx.modelo.dto.ClienteDTO;
+import com.ipn.mx.utilerias.EmailUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class ClienteMB extends BaseBean implements Serializable {
     private ClienteDAO dao = new ClienteDAO();
     private List<ClienteDTO> listaClientes;
     private OrdenDAO ordenes = new OrdenDAO();
+    private EmailUtil emailutil = new EmailUtil();
     private OrdenArticulosDAO ordenArt = new OrdenArticulosDAO();
     private String mensaje;
 
@@ -119,6 +121,7 @@ public class ClienteMB extends BaseBean implements Serializable {
     public String add() {
         try {
             dao.crear(dto);
+            //emailutil.enviarEmail(dto.getEntidad().getEmail(), "Creacion de cuenta en Snkr Store", "Se ha creado la cuenta exitosamente");
             return "/general/loginPage?faces-redirect=true";
         } catch (Exception e) {
             error("errorCrearCliente", "Error al crear cliente");

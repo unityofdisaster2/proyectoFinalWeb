@@ -9,6 +9,7 @@ import com.ipn.mx.modelo.dao.OrdenDAO;
 import com.ipn.mx.modelo.dto.OrdenDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +32,28 @@ public class OrdenMB extends BaseBean implements Serializable {
     private OrdenDTO dto;
     private OrdenDAO dao = new OrdenDAO();
     private List<OrdenDTO> listaOrdenes;
+    private Date fechaPrueba;
+    private String mensaje;
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+    
+
+    public Date getFechaPrueba() {
+        return fechaPrueba;
+    }
+
+    public void setFechaPrueba(Date fechaPrueba) {
+        this.fechaPrueba = fechaPrueba;
+    }
+    
+    
     public OrdenMB() {
     }
 
@@ -77,12 +100,12 @@ public class OrdenMB extends BaseBean implements Serializable {
 
     public String back() {
         init();
-        return "/ordenes/listaOrdenes?faces-redirect=true";
+        return "/ordenes/listaOrdenesAdmin?faces-redirect=true";
     }
 
     public String prepareIndex() {
         init();
-        return "/ordenes/listaOrdenes?faces-redirect=true";
+        return "/ordenes/listaOrdenesAdmin?faces-redirect=true";
     }
 
     public String crear() {
@@ -91,7 +114,7 @@ public class OrdenMB extends BaseBean implements Serializable {
             return prepareIndex();
         } catch (Exception e) {
             error("errorCrearEvento", "Error al crear el evento");
-            return "/ordenes/listaOrdenes?faces-redirect=true";
+            return "/ordenes/ordenForm?faces-redirect=true";
         }
     }
 
@@ -101,7 +124,7 @@ public class OrdenMB extends BaseBean implements Serializable {
             return prepareIndex();
         } catch (Exception e) {
             error("errorActualizarOrden", "Error al actualizar orden");
-            return "/ordenes/listaOrdenes?faces-redirect=true";
+            return "/ordenes/ordenForm?faces-redirect=true";
         }
     }
 
@@ -125,7 +148,7 @@ public class OrdenMB extends BaseBean implements Serializable {
         return "/clientes/indexCliente?faces-redirect=true";
     }
     
-    public void seleccionarProducto(ActionEvent event) {
+    public void seleccionarOrden(ActionEvent event) {
         String claveSel = (String) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequestParameterMap()
                 .get("claveSel");
@@ -137,6 +160,12 @@ public class OrdenMB extends BaseBean implements Serializable {
             ex.printStackTrace();
         }
     }
-    
+
+    public void mostrarMensaje(ActionEvent event) {
+        mensaje = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("activar");
+
+    }    
     
 }

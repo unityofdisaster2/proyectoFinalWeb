@@ -21,16 +21,26 @@
                 <c:choose>
                     <c:when test="#{productoMB.mensaje == 'update'}">
                         <script>
-                            alertify.success('Producto actualizado');
-                            #{productoMB.mensaje = ""}
+                            Swal.fire(
+                                    'Actualizado!',
+                                    'Se ha actualizado el producto!',
+                                    'success'
+                                    );
+
                         </script>
+                        #{productoMB.mensaje = ""}
                     </c:when>
 
                     <c:when test="#{productoMB.mensaje == 'nuevo'}">
                         <script>
-                            alertify.success('Producto agregado');
-                            #{productoMB.mensaje = ""}
+                            Swal.fire(
+                                    'Producto nuevo!',
+                                    'Se ha agregado nuevo producto!',
+                                    'success'
+                                    );
                         </script>
+
+                        #{productoMB.mensaje = ""}                        
                     </c:when>
                 </c:choose>
 

@@ -31,6 +31,15 @@ public class AdministradorMB extends BaseBean implements Serializable {
     private AdministradorDTO dto;
     private AdministradorDAO dao = new AdministradorDAO();
     private List<AdministradorDTO> listaAdmins;
+    private String mensaje;
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
     
     public AdministradorMB() {
     }
@@ -135,6 +144,13 @@ public class AdministradorMB extends BaseBean implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void mostrarMensaje(ActionEvent event) {
+        mensaje = (String) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestParameterMap()
+                .get("activar");
+        
     }    
     
 }

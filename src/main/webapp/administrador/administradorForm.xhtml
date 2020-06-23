@@ -143,8 +143,12 @@
                                 </div>
 
                             </div>
-                            <p:commandButton action="#{administradorMB.add()}" rendered="#{administradorMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear"/>
-                            <p:commandButton action="#{administradorMB.update()}" rendered="#{administradorMB.modoActualizar}"  type="Submit" class="btn btn-outline-primary" value="Actualizar"/>
+                            <p:commandButton action="#{administradorMB.add()}" actionListener="#{administradorMB.mostrarMensaje(event)}" rendered="#{administradorMB.modoCrear}"  type="Submit" class="btn btn-outline-primary" value="Crear">
+                                <f:param name="activar" value="nuevo"></f:param>
+                            </p:commandButton>
+                            <p:commandButton action="#{administradorMB.update()}" actionListener="#{administradorMB.mostrarMensaje(event)}" rendered="#{administradorMB.modoActualizar}"  type="Submit" class="btn btn-outline-primary" value="Actualizar">
+                                <f:param name="activar" value="update"></f:param>
+                            </p:commandButton>
 
                             <p:messages></p:messages>
                         </h:form>

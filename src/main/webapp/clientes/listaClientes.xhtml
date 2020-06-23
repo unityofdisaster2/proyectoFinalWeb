@@ -16,6 +16,34 @@
             </ui:define>
 
             <ui:define name="content">
+                <c:choose>
+                    <c:when test="#{clienteMB.mensaje == 'update'}">
+                        <script>
+                            Swal.fire(
+                                    'Actualizado!',
+                                    'Se han actualizado datos de cliente correctamente!',
+                                    'success'
+                                    );
+
+                        </script>
+                        #{clienteMB.mensaje = ""}
+                    </c:when>
+
+                    <c:when test="#{clienteMB.mensaje == 'nuevo'}">
+                        <script>
+                            Swal.fire(
+                                    'Cliente nuevo!',
+                                    'Se ha agregado nuevo cliente!',
+                                    'success'
+                                    );
+                        </script>
+
+                        #{clienteMB.mensaje = ""}                        
+                    </c:when>
+                </c:choose>
+
+
+                
                 <div class="container">
                     <f:view>
                         <h:form id="frmClientes">

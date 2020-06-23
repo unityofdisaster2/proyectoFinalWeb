@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -15,6 +16,30 @@
             </ui:define>
 
             <ui:define name="content">
+                <c:choose>
+                    <c:when test="#{administradorMB.mensaje == 'update'}">
+                        <script>
+                            Swal.fire(
+                                    'Actualizado!',
+                                    'Se han actualizado datos de administrador!',
+                                    'success'
+                                    );                            
+                            #{administradorMB.mensaje = ""}
+                        </script>
+                    </c:when>
+
+                    <c:when test="#{administradorMB.mensaje == 'nuevo'}">
+                        <script>
+                            Swal.fire(
+                                    'Excelente!',
+                                    'Se ha creado nuevo administrador!',
+                                    'success'
+                                    );                            
+                            #{administradorMB.mensaje = ""}
+                        </script>
+                    </c:when>
+                </c:choose>
+                
                 <div class="container">
                     <f:view>
                         <h:form id="frmAdmns">

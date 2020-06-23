@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaAdministrador.xhtml">
+
+            <ui:define name="titulo">
+                <title>Lista de ordenes</title>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container">
+                    <c:if test="#{ordenMB.mensaje == 'update'}">
+                        <script>
+                            Swal.fire(
+                                    'Actualizado!',
+                                    'Se ha actualizado la orden!',
+                                    'success'
+                                    )
+                        </script>
+                        #{ordenMB.mensaje = ""}
+                    </c:if>
+                    <f:view>
+                        <h:form id="frmAdmns">
+                            <div style="padding-bottom:10px"></div>
+
+
+                            <h:dataTable value="#{ordenMB.listaOrdenes}" var="dto" class="table table-hover table-responsive-sm table-dark table-bordered rounded">
+
+                                <h:column class="col">
+                                    <f:facet name="header">Id de Orden</f:facet>
+                                    <h:outputText value="#{dto.entidad.idOrden}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Estatus</f:facet>
+
+                                    <ui:fragment rendered="#{dto.entidad.estatusOrden eq 'P'}">
+                                        <span class="badge badge-secondary">Procesando</span>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{dto.entidad.estatusOrden eq 'C'}">
+                                        <span class="badge badge-info">En camino</span>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{dto.entidad.estatusOrden eq 'E'}">
+                                        <span class="badge badge-success">Entregado</span>
+                                    </ui:fragment>
+
+
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">fecha orden</f:facet>
+                                    <h:outputText value="#{dto.entidad.fechaOrden}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">fechaEnvio</f:facet>
+                                    <h:outputText value="#{dto.entidad.fechaEnvio}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Fecha entrega</f:facet>
+                                    <h:outputText value="#{dto.entidad.fechaEntrega}"/>
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">Acciones</f:facet>
+
+                                    <p:commandButton class="btn btn-danger" update="@form" value="Eliminar" actionListener="#{ordenMB.seleccionarOrden(event)}" action="#{ordenMB.borrar()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idOrden}" />
+                                    </p:commandButton>
+                                    <p:commandButton class="btn btn-primary" value="Actualizar" actionListener="#{ordenMB.seleccionarOrden(event)}" action="#{ordenMB.prepareUpdate()}">
+                                        <f:param name="claveSel" value="#{dto.entidad.idOrden}" />
+                                    </p:commandButton>
+
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                </div>
+                <div style="padding-bottom: 150px"></div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

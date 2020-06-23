@@ -19,17 +19,25 @@
 
             <ui:define name="content">
                 <c:choose>
-                    <c:when test="#{productoMB.mensaje == 'update'}">
+                    <c:when test="#{categoriaMB.mensaje == 'update'}">
                         <script>
-                            alertify.success('Producto actualizado');
-                            #{productoMB.mensaje = ""}
+                            Swal.fire(
+                                    'Actualizado!',
+                                    'Se han actualizado datos de categoria correctamente!',
+                                    'success'
+                                    );                            
+                            #{categoriaMB.mensaje = ""}
                         </script>
                     </c:when>
 
-                    <c:when test="#{productoMB.mensaje == 'nuevo'}">
+                    <c:when test="#{categoriaMB.mensaje == 'nuevo'}">
                         <script>
-                            alertify.success('Producto agregado');
-                            #{productoMB.mensaje = ""}
+                            Swal.fire(
+                                    'Excelente!',
+                                    'Se ha creado nueva categoria!',
+                                    'success'
+                                    );                            
+                            #{categoriaMB.mensaje = ""}
                         </script>
                     </c:when>
                 </c:choose>

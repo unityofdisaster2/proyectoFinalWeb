@@ -9,7 +9,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="alertify.min.css"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputScript library="js" name="jquery-3.5.1.min.js"/>
+        <!--<h:outputScript library="js" name="jquery-3.5.1.min.js"/>-->
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
         <h:outputScript library="js" name="popper.min.js"/>
         <h:outputScript library="js" name="bootstrap.min.js"/>
         <h:outputScript library="js" name="alertify.min.js"/>
@@ -52,10 +53,10 @@
                                             <h:commandLink class="nav-link" action="#{administradorMB.prepareIndex()}" value="Lista de administradores" />
                                         </li>
                                         <li class="nav-item">
-                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Lista de ordenes" />
+                                            <h:commandLink class="nav-link" action="#{ordenMB.prepareIndex()}" value="Lista de ordenes" />
                                         </li>
                                         <li class="nav-item">
-                                            <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Grafica de ventas" />
+                                            <h:commandLink class="nav-link" action="#{ordenArticulosMB.generarGrafica()}" value="Grafica de ventas" />
                                         </li>
                                         <li class="nav-item">
                                             <h:commandLink class="nav-link" action="#{clienteMB.prepareUpdate()}" value="Reporte de ventas" />
@@ -80,7 +81,7 @@
                 <div id="bottom">
                     <ui:insert name="bottom">
                         <!-- Footer -->
-                        <footer class="page-footer font-small blue pt-4" style="background-color: black;color: white">
+                        <footer class="page-footer font-small blue pt-4 sticky-bottom" style="background-color: black;color: white">
 
                             <!-- Footer Links -->
                             <div class="container-fluid text-center text-md-left">

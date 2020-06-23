@@ -68,10 +68,10 @@
                             </div>
 
 
-                            <p:commandButton value="Nuevo" action="#{categoriaMB.crear()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{categoriaMB.modoCrear}" class="btn btn-outline-primary">
+                            <p:commandButton value="Nuevo" action="#{categoriaMB.crear()}" actionListener="#{categoriaMB.mostrarMensaje}" rendered="#{categoriaMB.modoCrear}" class="btn btn-outline-primary">
                                 <f:param name="activar" value="nuevo"></f:param>
                             </p:commandButton>
-                            <p:commandButton value="Actualizar" action="#{categoriaMB.actualizar()}" actionListener="#{productoMB.mostrarMensaje}" rendered="#{categoriaMB.modoActualizar}" class="btn btn-primary">
+                            <p:commandButton value="Actualizar" action="#{categoriaMB.actualizar()}" actionListener="#{categoriaMB.mostrarMensaje}" rendered="#{categoriaMB.modoActualizar}" class="btn btn-primary">
                                 <f:param name="activar" value="update"></f:param>
                             </p:commandButton>
 

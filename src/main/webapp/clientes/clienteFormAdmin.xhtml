@@ -285,9 +285,13 @@
 
                             </div>
                             <p:messages></p:messages>
-                            <p:commandButton action="#{clienteMB.addFromAdmin()}" rendered="#{clienteMB.modoCrear}" class="btn btn-outline-primary" value="Crear"/>
+                            <p:commandButton action="#{clienteMB.addFromAdmin()}" rendered="#{clienteMB.modoCrear}" actionListener="#{clienteMB.mostrarMensaje(event)}" class="btn btn-outline-primary" value="Crear">
+                                <f:param name="activar" value="nuevo"/>
+                            </p:commandButton>
 
-                            <p:commandButton action="#{clienteMB.adminUpdate()}" rendered="#{clienteMB.modoActualizar}" class="btn btn-outline-primary" value="Actualizar"/>
+                            <p:commandButton action="#{clienteMB.adminUpdate()}" rendered="#{clienteMB.modoActualizar}" actionListener="#{clienteMB.mostrarMensaje(event)}" class="btn btn-outline-primary" value="Actualizar">
+                                <f:param name="activar" value="update"/>
+                            </p:commandButton>
                         </h:form>
                     </f:view>
                 </div>
